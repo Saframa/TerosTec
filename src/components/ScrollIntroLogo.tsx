@@ -106,16 +106,13 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
   const currentY = startY + (endY - startY) * easedP;
 
   // Tamaño del emblema: inicial en el centro -> destino en el navbar (24px)
-  const startEmblemSize = Math.min(110, Math.max(76, windowSize.width * 0.22));
+  const startEmblemSize = Math.min(136, Math.max(86, windowSize.width * 0.24));
   const targetEmblemSize = 24;
   const currentEmblemSize = startEmblemSize + (targetEmblemSize - startEmblemSize) * easedP;
 
   // Transición de badge oscuro y color blanco al aproximarse al header (progreso 0.75 a 1.0)
   const badgeOpacity = Math.max(0, Math.min(1, (progress - 0.75) / 0.25));
   const whiteOpacity = Math.max(0, Math.min(1, (progress - 0.75) / 0.25));
-
-  // Opacidad del fondo de aluminio inicial (se desvanece de 0 a 0.25 de scroll)
-  const aluminumOpacity = Math.max(0, 1 - progress / 0.25);
 
   // El logo flotante se oculta al atracar completamente para ceder el control al navbar
   const isDocked = progress >= 0.98;
@@ -128,26 +125,6 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
     <>
       {/* Pista de scroll que proporciona la distancia física para la animación diagonal */}
       <div className="h-[420px] pointer-events-none" aria-hidden="true" />
-
-      {/* Escenario inicial: Logo sobre fondo de aluminio */}
-      {aluminumOpacity > 0.01 && (
-        <div
-          className="fixed inset-0 z-30 pointer-events-none flex items-center justify-center p-4 transition-opacity duration-150"
-          style={{ opacity: aluminumOpacity }}
-          aria-hidden="true"
-        >
-          <div className="relative w-[88vw] max-w-[500px] aspect-[1024/559] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/40 ring-1 ring-black/10 select-none">
-            <img
-              src="/logo-aluminum.jpg"
-              alt="TerosTec Aluminium Logo"
-              className="w-full h-full object-cover"
-              draggable={false}
-            />
-            {/* Sutil resplandor de iluminación metálica */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-black/5 via-transparent to-white/15 pointer-events-none" />
-          </div>
-        </div>
-      )}
 
       {/* Logo flotante animado en diagonal */}
       {!isDocked && (
