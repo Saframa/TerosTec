@@ -25,46 +25,28 @@ export const Contact: React.FC = () => {
     setStatus('sending');
 
     try {
-      let isSuccess = false;
-
-      // Si se configuro un ID de Formspree, se envia por su endpoint
-      if (siteConfig.formspreeId && siteConfig.formspreeId.trim() !== '') {
-        const response = await fetch(`https://formspree.io/f/${siteConfig.formspreeId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            service: formData.service,
-            message: formData.message,
-            _subject: `Nuevo Requerimiento TerosTec: ${formData.name}`,
-          }),
-        });
-        isSuccess = response.ok;
-      } else {
-        // Envio nativo de Netlify Forms
-        const body = new URLSearchParams({
-          'form-name': 'contact',
+      // Envio gratuito directo a terostecuy@gmail.com a traves de FormSubmit
+      const response = await fetch(`https://formsubmit.co/ajax/${siteConfig.email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
           service: formData.service,
           message: formData.message,
-        }).toString();
+          _subject: `Nuevo Proyecto TerosTec: ${formData.name} (${formData.service})`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
 
-        const response = await fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body,
-        });
-        isSuccess = response.ok;
-      }
+      const data = await response.json();
 
-      if (isSuccess) {
+      if (response.ok && (data.success === 'true' || data.success === true)) {
         setStatus('success');
         setFormData({
           name: '',
