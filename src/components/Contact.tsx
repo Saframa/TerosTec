@@ -25,24 +25,46 @@ export const Contact: React.FC = () => {
     setStatus('sending');
 
     try {
-      // Intentamos envio a traves de Formspree con fallback a apertura directa de cliente de correo
-      const response = await fetch(siteConfig.formspreeEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
+      let isSuccess = false;
+
+      // Si se configuro un ID de Formspree, se envia por su endpoint
+      if (siteConfig.formspreeId && siteConfig.formspreeId.trim() !== '') {
+        const response = await fetch(`https://formspree.io/f/${siteConfig.formspreeId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            service: formData.service,
+            message: formData.message,
+            _subject: `Nuevo Requerimiento TerosTec: ${formData.name}`,
+          }),
+        });
+        isSuccess = response.ok;
+      } else {
+        // Envio nativo de Netlify Forms
+        const body = new URLSearchParams({
+          'form-name': 'contact',
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
           service: formData.service,
           message: formData.message,
-          _subject: `Nuevo Proyecto TerosTec: ${formData.name} (${formData.service})`,
-        }),
-      });
+        }).toString();
 
-      if (response.ok) {
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body,
+        });
+        isSuccess = response.ok;
+      }
+
+      if (isSuccess) {
         setStatus('success');
         setFormData({
           name: '',
@@ -52,22 +74,10 @@ export const Contact: React.FC = () => {
           message: '',
         });
       } else {
-        // En caso de que el endpoint no este configurado aun, preparamos mailto directo
-        const subject = encodeURIComponent(`Nuevo Proyecto TerosTec - ${formData.service}`);
-        const body = encodeURIComponent(
-          `Nombre: ${formData.name}\nEmail: ${formData.email}\nTelefono: ${formData.phone}\nSolucion: ${formData.service}\n\nDetalles:\n${formData.message}`
-        );
-        window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
-        setStatus('success');
+        setStatus('error');
       }
     } catch {
-      // Fallback a mailto client si hay error de red
-      const subject = encodeURIComponent(`Nuevo Proyecto TerosTec - ${formData.service}`);
-      const body = encodeURIComponent(
-        `Nombre: ${formData.name}\nEmail: ${formData.email}\nTelefono: ${formData.phone}\nSolucion: ${formData.service}\n\nDetalles:\n${formData.message}`
-      );
-      window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
-      setStatus('success');
+      setStatus('error');
     }
   };
 
@@ -190,7 +200,17 @@ export const Contact: React.FC = () => {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
+                >
+                  {/* Campos ocultos requeridos por Netlify Forms */}
+                  <input type="hidden" name="form-name" value="contact" />
+                  <input type="hidden" name="bot-field" />
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-xs font-semibold uppercase tracking-wider text-[#475569] mb-1.5">
@@ -275,6 +295,18 @@ export const Contact: React.FC = () => {
                       className="w-full px-4 py-3 rounded-xl bg-white border border-black/10 focus:border-black/30 focus:outline-hidden text-sm text-[#0F172A] placeholder:text-[#94A3B8] transition-all resize-y"
                     />
                   </div>
+
+                  {status === 'error' && (
+                    <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                      <span>{t('form_error')}</span>
+                      <a
+                        href={`mailto:${siteConfig.email}`}
+                        className="font-semibold underline shrink-0 hover:text-black"
+                      >
+                        {siteConfig.email}
+                      </a>
+                    </div>
+                  )}
 
                   <button
                     type="submit"
