@@ -13,8 +13,8 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
   const [targetPos, setTargetPos] = useState({ x: 42, y: 36 });
   const [mounted, setMounted] = useState(false);
 
-  // Distancia total de scroll necesaria para completar la trayectoria diagonal
-  const SCROLL_DISTANCE = 420;
+  // Distancia total de scroll necesaria para completar la trayectoria diagonal (rápida y directa)
+  const SCROLL_DISTANCE = 220;
 
   // Calculo preciso de las coordenadas del blanco en el header fijo
   const computeTarget = () => {
@@ -90,8 +90,8 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
   // Progreso normalizado de 0 a 1
   const progress = Math.min(1, Math.max(0, scrollY / SCROLL_DISTANCE));
 
-  // Curva de desaceleración suave estilo Apple (Cubic ease-out)
-  const easedP = 1 - Math.pow(1 - progress, 2.2);
+  // Curva de aceleración ágil y desaceleración fluida estilo Apple (Cubic ease-out)
+  const easedP = 1 - Math.pow(1 - progress, 2.6);
 
   // Origen: centro exacto del viewport
   const startX = windowSize.width / 2;
@@ -110,12 +110,12 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
   const targetEmblemSize = 24;
   const currentEmblemSize = startEmblemSize + (targetEmblemSize - startEmblemSize) * easedP;
 
-  // Transición de badge oscuro y color blanco al aproximarse al header (progreso 0.75 a 1.0)
-  const badgeOpacity = Math.max(0, Math.min(1, (progress - 0.75) / 0.25));
-  const whiteOpacity = Math.max(0, Math.min(1, (progress - 0.75) / 0.25));
+  // Transición de badge oscuro y color blanco al aproximarse al header (progreso 0.60 a 0.95)
+  const badgeOpacity = Math.max(0, Math.min(1, (progress - 0.6) / 0.35));
+  const whiteOpacity = Math.max(0, Math.min(1, (progress - 0.6) / 0.35));
 
-  // El logo flotante se oculta al atracar completamente para ceder el control al navbar
-  const isDocked = progress >= 0.98;
+  // El logo flotante se acopla con agilidad al aproximarse a destino
+  const isDocked = progress >= 0.95;
 
   const handleExploreClick = () => {
     window.scrollTo({ top: SCROLL_DISTANCE, behavior: 'smooth' });
@@ -124,7 +124,7 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
   return (
     <>
       {/* Pista de scroll que proporciona la distancia física para la animación diagonal */}
-      <div className="h-[420px] pointer-events-none" aria-hidden="true" />
+      <div className="h-[220px] pointer-events-none" aria-hidden="true" />
 
       {/* Logo flotante animado en diagonal */}
       {!isDocked && (

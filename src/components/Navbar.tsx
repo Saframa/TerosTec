@@ -15,18 +15,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio, introProgress }
 
   const isIntroControlled = introProgress !== undefined;
   const headerOpacity = isIntroControlled
-    ? introProgress <= 0.75
+    ? introProgress <= 0.55
       ? 0
-      : Math.min(1, (introProgress - 0.75) / 0.25)
+      : Math.min(1, (introProgress - 0.55) / 0.3)
     : 1;
   const headerPointerEvents = isIntroControlled
-    ? introProgress >= 0.95
+    ? introProgress >= 0.85
       ? 'auto'
       : 'none'
     : 'auto';
   const logoOpacity = isIntroControlled
-    ? introProgress >= 0.96
-      ? Math.min(1, (introProgress - 0.96) / 0.04)
+    ? introProgress >= 0.92
+      ? Math.min(1, (introProgress - 0.92) / 0.08)
       : 0
     : 1;
 

@@ -10,13 +10,8 @@ export const Hero: React.FC<HeroProps> = ({ introProgress }) => {
   const { t } = useLanguage();
 
   const isIntroControlled = introProgress !== undefined;
-  const revealProgress = isIntroControlled
-    ? introProgress <= 0.75
-      ? 0
-      : Math.min(1, (introProgress - 0.75) / 0.25)
-    : 1;
-  const translateY = isIntroControlled ? (1 - revealProgress) * 24 : 0;
-  const pointerEvents = isIntroControlled ? (revealProgress >= 0.95 ? 'auto' : 'none') : 'auto';
+  // Revelado ágil y 100% nítido: sin texturas rasterizadas de GPU ni opacidades intermedias lentas
+  const isRevealed = !isIntroControlled || introProgress >= 0.55;
 
   const valueProps = [
     {
@@ -48,12 +43,11 @@ export const Hero: React.FC<HeroProps> = ({ introProgress }) => {
   return (
     <section
       style={{
-        opacity: revealProgress,
-        transform: `translate3d(0, ${translateY}px, 0)`,
-        pointerEvents: pointerEvents as 'auto' | 'none',
-        willChange: 'opacity, transform',
+        opacity: isRevealed ? 1 : 0,
+        pointerEvents: isRevealed ? 'auto' : 'none',
+        transition: 'opacity 0.2s ease-out',
       }}
-      className="relative pt-20 pb-20 sm:pt-28 sm:pb-28 overflow-hidden transition-none"
+      className="relative pt-28 pb-20 sm:pt-36 sm:pb-28 lg:pt-40 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Titular Principal y Propuesta de Valor */}
