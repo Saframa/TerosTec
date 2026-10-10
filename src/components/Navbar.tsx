@@ -56,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio, introProgress }
       style={{ opacity: headerOpacity, pointerEvents: headerPointerEvents as 'auto' | 'none' }}
       className="fixed top-0 left-0 right-0 z-40 w-full glass-nav transition-opacity duration-200"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 flex items-center justify-between">
         {/* Monograma y Logotipo */}
         <a
           href="#"

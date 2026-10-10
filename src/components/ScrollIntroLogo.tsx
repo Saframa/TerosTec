@@ -18,7 +18,7 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
 
   // Calculo preciso de las coordenadas del blanco en el header fijo
   const computeTarget = () => {
-    if (typeof window === 'undefined') return { x: 42, y: 32 };
+    if (typeof window === 'undefined') return { x: 42, y: 28 };
 
     const el = document.getElementById('navbar-logo-target');
     if (el) {
@@ -31,13 +31,13 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
       }
     }
 
-    // Calculo de contingencia para el navbar fijo (altura ~64px, centrado y=32)
+    // Calculo de contingencia para el navbar fijo (altura ~54px, centrado y=27)
     const isMobile = window.innerWidth < 640;
     const paddingX = isMobile ? 16 : window.innerWidth < 1024 ? 24 : 32;
     const containerLeft = Math.max(0, (window.innerWidth - 1280) / 2);
     return {
       x: containerLeft + paddingX + 18,
-      y: 32,
+      y: isMobile ? 26 : 28,
     };
   };
 
@@ -99,7 +99,7 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
 
   // Destino: icono del logo en el navbar fijo
   const endX = targetPos.x > 0 ? targetPos.x : 48;
-  const endY = targetPos.y > 0 ? targetPos.y : 32;
+  const endY = targetPos.y > 0 ? targetPos.y : 28;
 
   // Coordenadas actuales en la trayectoria diagonal
   const currentX = startX + (endX - startX) * easedP;
