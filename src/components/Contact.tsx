@@ -95,7 +95,7 @@ export const Contact: React.FC = () => {
     setStatus('sending');
 
     try {
-      // Envio gratuito directo a terostecuy@gmail.com a traves de FormSubmit
+      // Envío gratuito directo a terostecuy@gmail.com a través de FormSubmit
       const response = await fetch(`https://formsubmit.co/ajax/${siteConfig.email}`, {
         method: 'POST',
         headers: {
@@ -142,10 +142,10 @@ export const Contact: React.FC = () => {
           'Cotizadores & Calculadores Web',
           'Sistemas de Reservas y Turnos',
           'E-Commerce & Pagos Integrados',
-          'Catalogos B2B y Portales',
+          'Catálogos B2B y Portales',
           'Bots de WhatsApp Automatizados',
-          'Integracion de APIs (n8n / Make)',
-          'Dashboards BI & Metricas',
+          'Integración de APIs (n8n / Make)',
+          'Dashboards BI & Métricas',
           'Control de Stock e Inventario',
           'Software a Medida / App PWA / MVP',
           'Otro Requerimiento',
@@ -168,7 +168,7 @@ export const Contact: React.FC = () => {
     <section id="contact" className="py-20 sm:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Columna Izquierda: Informacion Institucional */}
+          {/* Columna Izquierda: Información Institucional */}
           <div className="lg:col-span-5 space-y-8">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-white/70 text-[#475569] border border-black/8 mb-4">
@@ -206,7 +206,7 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-[11px] font-medium uppercase tracking-wider text-[#94A3B8]">
-                    Ubicacion & Cobertura
+                    Ubicación & Cobertura
                   </span>
                   <p className="text-sm font-semibold text-[#0F172A]">
                     {siteConfig.location} ({siteConfig.reach})
@@ -220,11 +220,11 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-[11px] font-medium uppercase tracking-wider text-[#94A3B8]">
-                    Respuesta Tecnica
+                    Respuesta Técnica
                   </span>
                   <p className="text-sm font-semibold text-[#0F172A]">
                     {language === 'es'
-                      ? 'Atencion en menos de 24 horas habiles'
+                      ? 'Atención en menos de 24 horas hábiles'
                       : 'Response within 24 business hours'}
                   </p>
                 </div>
@@ -367,7 +367,7 @@ export const Contact: React.FC = () => {
                       <div className="flex items-center gap-2 font-semibold">
                         <Timer className="w-4 h-4 text-amber-600" />
                         <span>
-                          {language === 'es' ? 'Limite temporal de envios alcanzado' : 'Rate limit reached'}
+                          {language === 'es' ? 'Límite temporal de envíos alcanzado' : 'Rate limit reached'}
                         </span>
                       </div>
                       <p className="text-amber-800 leading-relaxed">
@@ -411,7 +411,7 @@ export const Contact: React.FC = () => {
                     <div className="text-[11px] text-[#64748B] flex items-center justify-between px-1 font-mono">
                       <span>
                         {language === 'es'
-                          ? `Envios en esta ventana: ${submissionsCount}/${MAX_SUBMISSIONS}`
+                          ? `Envíos en esta ventana: ${submissionsCount}/${MAX_SUBMISSIONS}`
                           : `Submissions in this window: ${submissionsCount}/${MAX_SUBMISSIONS}`}
                       </span>
                       <span>

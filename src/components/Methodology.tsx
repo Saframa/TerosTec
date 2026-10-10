@@ -48,7 +48,7 @@ export const Methodology: React.FC = () => {
           </p>
         </div>
 
-        {/* 4 Fases de Ingenieria */}
+        {/* 4 Fases de Ingeniería */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step) => {
             const Icon = step.icon;

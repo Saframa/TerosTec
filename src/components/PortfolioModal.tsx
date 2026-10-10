@@ -48,7 +48,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ isOpen, onClose 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-      {/* Fondo oscuro traslucido */}
+      {/* Fondo oscuro traslúcido */}
       <div
         className="fixed inset-0 bg-slate-900/60 backdrop-blur-md transition-opacity"
         onClick={onClose}

@@ -75,7 +75,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
           ))}
         </nav>
 
-        {/* Acciones: Selector de Idioma y Boton CTA */}
+        {/* Acciones: Selector de Idioma y Botón CTA */}
         <div className="hidden md:flex items-center gap-3">
           {/* Selector Bilingüe ES / EN */}
           <button
@@ -104,7 +104,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
           </a>
         </div>
 
-        {/* Boton Hamburguesa Movil */}
+        {/* Botón Hamburguesa Móvil */}
         <div className="flex md:hidden items-center gap-2">
           <button
             onClick={toggleLanguage}
@@ -116,14 +116,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-lg bg-white/80 border border-black/10 text-[#0F172A]"
-            aria-label="Abrir menu"
+            aria-label="Abrir menú"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Menu desplegable para dispositivos moviles */}
+      {/* Menú desplegable para dispositivos móviles */}
       {mobileMenuOpen && (
         <div className="md:hidden px-4 pt-2 pb-6 bg-[#E6E9EE]/98 border-b border-black/10 shadow-lg">
           <div className="flex flex-col space-y-3 pt-2">

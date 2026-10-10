@@ -48,7 +48,7 @@ export const Hero: React.FC = () => {
             {t('hero_subtitle')}
           </p>
 
-          {/* Botones de Accion Directa */}
+          {/* Botones de Acción Directa */}
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#contact"
@@ -68,7 +68,7 @@ export const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* 4 Metricas / Fundamentos en Color Perla */}
+        {/* 4 Métricas / Fundamentos en Color Perla */}
         <div className="mt-16 sm:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {valueProps.map((item) => {
             const Icon = item.icon;

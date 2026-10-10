@@ -13,11 +13,11 @@ export const siteConfig = {
   email: "terostecuy@gmail.com",
   location: "Montevideo, Uruguay",
   reach: "Global",
-  // Si se desea utilizar Formspree en lugar de Netlify Forms, colocar aqui el ID (ej: "xyzabwre")
+  // Si se desea utilizar Formspree en lugar de Netlify Forms, colocar aquí el ID (ej: "xyzabwre")
   formspreeId: "",
   
-  // Feature flag para el portafolio (actualmente oculto por peticion)
-  // Cambiar a true cuando se desee mostrar publicamente en la navegacion y flujo principal
+  // Feature flag para el portafolio (actualmente oculto por petición)
+  // Cambiar a true cuando se desee mostrar públicamente en la navegación y flujo principal
   showPortfolio: false,
 
   team: [

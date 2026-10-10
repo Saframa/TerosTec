@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
     <footer className="mt-16 border-t border-black/8 bg-white/40 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Logo y Descripcion */}
+          {/* Logo y Descripción */}
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-xl bg-[#0F172A] text-white flex items-center justify-center font-bold text-xs tracking-tighter">
               TT
@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Enlaces de Navegacion Rapida */}
+          {/* Enlaces de Navegación Rápida */}
           <div className="flex items-center gap-6 text-xs font-medium text-[#475569]">
             <a href="#services" className="hover:text-[#0F172A] transition-colors">
               {t('nav_services')}
@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
             </a>
           </div>
 
-          {/* Boton Volver Arriba */}
+          {/* Botón Volver Arriba */}
           <button
             onClick={scrollToTop}
             className="w-9 h-9 rounded-full bg-white/80 hover:bg-white border border-black/10 flex items-center justify-center text-[#475569] hover:text-[#0F172A] transition-colors"
@@ -62,7 +62,7 @@ export const Footer: React.FC = () => {
             (c) {currentYear} {siteConfig.name}. {t('footer_rights')}
           </p>
           <p>
-            Ingenieria de Software, Rendimiento & Diseno Boutique.
+            Ingeniería de Software, Rendimiento & Diseño Boutique.
           </p>
         </div>
       </div>

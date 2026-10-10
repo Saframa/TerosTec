@@ -39,7 +39,7 @@ export const AppContent: React.FC = () => {
       {/* Efectos de fondo reactivos y textura */}
       <BackgroundEffect />
 
-      {/* Barra de Navegacion */}
+      {/* Barra de Navegación */}
       <Navbar onOpenPortfolio={() => setIsPortfolioOpen(true)} />
 
       {/* Contenido Principal */}
@@ -51,7 +51,7 @@ export const AppContent: React.FC = () => {
         <Contact />
       </main>
 
-      {/* Pie de Pagina */}
+      {/* Pie de Página */}
       <Footer />
 
       {/* Modal de Portafolio Oculto / Preview */}

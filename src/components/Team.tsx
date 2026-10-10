@@ -58,7 +58,7 @@ export const Team: React.FC = () => {
                 </p>
               </div>
 
-              {/* Insignia Academica UdelaR / UTEC */}
+              {/* Insignia Académica UdelaR / UTEC */}
               <div className="mt-6 pt-4 border-t border-black/5">
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#E6E9EE] text-[#334155] text-[11px] font-medium">
                   <GraduationCap className="w-3.5 h-3.5 text-[#475569]" />

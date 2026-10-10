@@ -117,7 +117,7 @@ export const ServicesBento: React.FC = () => {
   return (
     <section id="services" className="py-20 sm:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Cabecera de la Seccion */}
+        {/* Cabecera de la Sección */}
         <div className="max-w-3xl mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-white/70 text-[#475569] border border-black/8 mb-4">
             {t('services_section_tag')}
@@ -177,7 +177,7 @@ export const ServicesBento: React.FC = () => {
                 </div>
               </div>
 
-              {/* Boton de Consulta */}
+              {/* Botón de Consulta */}
               <div className="pt-2 border-t border-black/5">
                 <a
                   href="#contact"
