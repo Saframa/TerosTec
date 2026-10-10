@@ -186,12 +186,85 @@
         window.addEventListener('load', purge);
       })();
     </script>
+    <!-- ESTILOS CRITICOS DEL PRELOADER CON LLENADO DE LOGO -->
+    <style>
+      @keyframes logoFillUp {
+        0% {
+          clip-path: inset(100% 0 0 0);
+          -webkit-clip-path: inset(100% 0 0 0);
+        }
+        100% {
+          clip-path: inset(0% 0 0 0);
+          -webkit-clip-path: inset(0% 0 0 0);
+        }
+      }
+
+      body.preloading {
+        overflow: hidden !important;
+        height: 100vh !important;
+        touch-action: none !important;
+      }
+
+      #app-preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #E6E9EE;
+        transition: opacity 0.35s ease, visibility 0.35s ease;
+      }
+
+      .preloader-emblem-box {
+        position: relative;
+        width: clamp(86px, 24vw, 136px);
+        height: clamp(86px, 24vw, 136px);
+      }
+
+      .preloader-fill-layer {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        clip-path: inset(100% 0 0 0);
+        -webkit-clip-path: inset(100% 0 0 0);
+        animation: logoFillUp 1.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+    </style>
   </head>
-  <body class="bg-[#E6E9EE] text-[#0F172A] antialiased selection:bg-neutral-300 selection:text-neutral-900">
-    <!-- 5. PRE-RENDERIZADO SEMÁNTICO PARA MOTORES DE BÚSQUEDA Y CRAWLERS -->
-    <!-- Este contenido semántico permite que Googlebot y motores de búsqueda indexen de inmediato -->
-    <!-- la estructura completa sin esperar la ejecución de JavaScript. React hidratará/reemplazará al montar. -->
-    <div id="root">
+  <body class="bg-[#E6E9EE] text-[#0F172A] antialiased selection:bg-neutral-300 selection:text-neutral-900 preloading">
+    <!-- PRELOADER CON LLENADO ASCENDENTE DEL LOGO DE LA EMPRESA -->
+    <div id="app-preloader">
+      <div class="preloader-emblem-box">
+        <!-- Silueta tenue de fondo -->
+        <img
+          src="/logo-icon.png"
+          alt="TerosTec"
+          width="136"
+          height="136"
+          style="width: 100%; height: 100%; object-fit: contain; opacity: 0.12; user-select: none; pointer-events: none;"
+        />
+        <!-- Capa con llenado hacia arriba -->
+        <div class="preloader-fill-layer">
+          <img
+            src="/logo-icon.png"
+            alt="TerosTec"
+            width="136"
+            height="136"
+            style="width: 100%; height: 100%; object-fit: contain; user-select: none; pointer-events: none;"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL REACT -->
+    <div id="root"></div>
+
+    <!-- PRE-RENDERIZADO SEMANTICO PARA MOTORES DE BUSQUEDA Y CRAWLERS (INDEXABLE SIN PARPADEO VISUAL) -->
+    <div id="seo-fallback" style="position: absolute; left: -9999px; top: 0; width: 1px; height: 1px; overflow: hidden;" aria-hidden="false">
       <header>
         <nav aria-label="Navegación principal">
           <a href="/">TerosTec - Software Boutique</a>
@@ -236,6 +309,33 @@
         <p>&copy; 2026 TerosTec. Todos los derechos reservados. Montevideo, Uruguay.</p>
       </footer>
     </div>
+
+    <!-- CONTROL DEL CICLO DE VIDA DEL PRELOADER -->
+    <script>
+      (function() {
+        var isHash = window.location.hash && window.location.hash.length > 1;
+        var p = document.getElementById('app-preloader');
+        if (isHash && p) {
+          p.style.display = 'none';
+          document.body.classList.remove('preloading');
+          return;
+        }
+
+        var finish = function() {
+          if (!p || p.classList.contains('loaded')) return;
+          p.classList.add('loaded');
+          p.style.opacity = '0';
+          setTimeout(function() {
+            p.style.visibility = 'hidden';
+            p.style.display = 'none';
+            document.body.classList.remove('preloading');
+          }, 350);
+        };
+
+        // Completar tras la animación de llenado (1.3s)
+        setTimeout(finish, 1300);
+      })();
+    </script>
 
     <!-- Formulario estático para que Netlify Forms lo detecte durante la compilación -->
     <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
