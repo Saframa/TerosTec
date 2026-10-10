@@ -16,7 +16,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { DeviceEstimatorWidget } from './widgets/DeviceEstimatorWidget';
-import { B2BCheckoutWidget } from './widgets/B2BCheckoutWidget';
+import { OmnichannelSyncWidget } from './widgets/OmnichannelSyncWidget';
 import { WorkflowPipelineWidget } from './widgets/WorkflowPipelineWidget';
 import { BIDashboardWidget } from './widgets/BIDashboardWidget';
 
@@ -182,7 +182,7 @@ export const ServicesBento: React.FC = () => {
 
                 {/* Widgets Interactivos Especificos por Pilar */}
                 {pillar.id === 'pilar-1' && <DeviceEstimatorWidget />}
-                {pillar.id === 'pilar-2' && <B2BCheckoutWidget />}
+                {pillar.id === 'pilar-2' && <OmnichannelSyncWidget />}
                 {pillar.id === 'pilar-3' && <WorkflowPipelineWidget />}
                 {pillar.id === 'pilar-4' && <BIDashboardWidget />}
               </div>
