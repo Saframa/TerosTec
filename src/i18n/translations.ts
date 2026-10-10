@@ -117,6 +117,8 @@ export const translations = {
     form_sending: "Enviando...",
     form_success: "Mensaje procesado con exito. Recibiras nuestra respuesta a la brevedad.",
     form_error: "Hubo un error al enviar el formulario. Puedes escribirnos directamente a terostecuy@gmail.com.",
+    form_rate_limit: "Has alcanzado el limite de 3 mensajes cada 30 minutos para prevenir spam. Podras enviar otro mensaje en",
+    form_rate_limit_btn: "Espera",
 
     footer_location: "Montevideo, Uruguay - Alcance Global",
     footer_rights: "Todos los derechos reservados.",
@@ -237,6 +239,8 @@ export const translations = {
     form_sending: "Sending...",
     form_success: "Message processed successfully. We will reply shortly.",
     form_error: "There was an error sending the message. You can reach us directly at terostecuy@gmail.com.",
+    form_rate_limit: "You have reached the limit of 3 messages per 30 minutes to prevent spam. You can send another message in",
+    form_rate_limit_btn: "Wait",
 
     footer_location: "Montevideo, Uruguay - Global Reach",
     footer_rights: "All rights reserved.",

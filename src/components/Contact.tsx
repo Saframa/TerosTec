@@ -1,7 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { siteConfig } from '../config/site';
-import { Mail, MapPin, Send, CheckCircle2, Clock, ShieldCheck } from 'lucide-react';
+import { Mail, MapPin, Send, CheckCircle2, Clock, ShieldCheck, Timer } from 'lucide-react';
+
+const MAX_SUBMISSIONS = 3;
+const WINDOW_MS = 30 * 60 * 1000; // Ventana de 30 minutos
+const STORAGE_KEY = 'terostec_form_submissions';
+
+const getStoredSubmissions = (): number[] => {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) {
+      const now = Date.now();
+      return parsed.filter((ts): ts is number => typeof ts === 'number' && now - ts < WINDOW_MS);
+    }
+  } catch {
+    // ignora errores de lectura de storage
+  }
+  return [];
+};
+
+const recordSubmission = () => {
+  if (typeof window === 'undefined') return;
+  try {
+    const existing = getStoredSubmissions();
+    existing.push(Date.now());
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+  } catch {
+    // ignora errores de escritura de storage
+  }
+};
 
 export const Contact: React.FC = () => {
   const { t, language } = useLanguage();
@@ -13,6 +44,40 @@ export const Contact: React.FC = () => {
     message: '',
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [remainingSeconds, setRemainingSeconds] = useState<number>(0);
+  const [isRateLimited, setIsRateLimited] = useState<boolean>(false);
+  const [submissionsCount, setSubmissionsCount] = useState<number>(0);
+
+  const checkRateLimit = () => {
+    const valid = getStoredSubmissions();
+    setSubmissionsCount(valid.length);
+    if (valid.length >= MAX_SUBMISSIONS) {
+      const oldest = Math.min(...valid);
+      const diffMs = oldest + WINDOW_MS - Date.now();
+      if (diffMs > 0) {
+        setIsRateLimited(true);
+        setRemainingSeconds(Math.ceil(diffMs / 1000));
+        return;
+      }
+    }
+    setIsRateLimited(false);
+    setRemainingSeconds(0);
+  };
+
+  useEffect(() => {
+    checkRateLimit();
+    const interval = setInterval(checkRateLimit, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    if (mins > 0) {
+      return `${mins}m ${secs.toString().padStart(2, '0')}s`;
+    }
+    return `${secs}s`;
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -22,6 +87,11 @@ export const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isRateLimited) {
+      return;
+    }
+
     setStatus('sending');
 
     try {
@@ -47,6 +117,8 @@ export const Contact: React.FC = () => {
       const data = await response.json();
 
       if (response.ok && (data.success === 'true' || data.success === true)) {
+        recordSubmission();
+        checkRateLimit();
         setStatus('success');
         setFormData({
           name: '',
@@ -290,16 +362,63 @@ export const Contact: React.FC = () => {
                     </div>
                   )}
 
+                  {isRateLimited && (
+                    <div className="p-4 rounded-2xl bg-amber-50/90 border border-amber-200 text-amber-950 text-xs space-y-1.5 shadow-2xs">
+                      <div className="flex items-center gap-2 font-semibold">
+                        <Timer className="w-4 h-4 text-amber-600" />
+                        <span>
+                          {language === 'es' ? 'Limite temporal de envios alcanzado' : 'Rate limit reached'}
+                        </span>
+                      </div>
+                      <p className="text-amber-800 leading-relaxed">
+                        {t('form_rate_limit')}{' '}
+                        <strong className="font-mono text-amber-950 font-bold">{formatTime(remainingSeconds)}</strong>.
+                      </p>
+                      <p className="text-[11px] text-amber-700">
+                        {language === 'es'
+                          ? 'Si es urgente, puedes escribirnos directamente a '
+                          : 'For urgent matters, contact us directly at '}
+                        <a href={`mailto:${siteConfig.email}`} className="underline font-semibold text-amber-950">
+                          {siteConfig.email}
+                        </a>.
+                      </p>
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    disabled={status === 'sending'}
-                    className="apple-button w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-sm font-semibold bg-[#0F172A] text-white hover:bg-black disabled:opacity-60 transition-all shadow-md"
+                    disabled={status === 'sending' || isRateLimited}
+                    className="apple-button w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-sm font-semibold bg-[#0F172A] text-white hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md"
                   >
-                    <span>
-                      {status === 'sending' ? t('form_sending') : t('form_submit')}
-                    </span>
-                    <Send className="w-4 h-4 opacity-90" />
+                    {isRateLimited ? (
+                      <>
+                        <Timer className="w-4 h-4" />
+                        <span>
+                          {t('form_rate_limit_btn')} ({formatTime(remainingSeconds)})
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span>
+                          {status === 'sending' ? t('form_sending') : t('form_submit')}
+                        </span>
+                        <Send className="w-4 h-4 opacity-90" />
+                      </>
+                    )}
                   </button>
+
+                  {submissionsCount > 0 && !isRateLimited && (
+                    <div className="text-[11px] text-[#64748B] flex items-center justify-between px-1 font-mono">
+                      <span>
+                        {language === 'es'
+                          ? `Envios en esta ventana: ${submissionsCount}/${MAX_SUBMISSIONS}`
+                          : `Submissions in this window: ${submissionsCount}/${MAX_SUBMISSIONS}`}
+                      </span>
+                      <span>
+                        {language === 'es' ? 'Ventana: 30 min' : 'Window: 30 min'}
+                      </span>
+                    </div>
+                  )}
 
                   <div className="flex items-center justify-center gap-2 pt-2 text-[11px] text-[#94A3B8]">
                     <ShieldCheck className="w-3.5 h-3.5" />
