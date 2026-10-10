@@ -163,7 +163,28 @@
           }
         }
       ]
-    }
+    </script>
+
+    <!-- Supresión activa de insignias y widgets inyectados -->
+    <script>
+      (function() {
+        var purge = function() {
+          var frames = document.querySelectorAll(
+            '#nl-badge-frame, #nl-hud-frame, iframe[title*="Netlify"], iframe[id^="nl-"], netlify-drawer, [data-netlify-drawer]'
+          );
+          frames.forEach(function(f) {
+            if (f && f.parentNode) {
+              f.parentNode.removeChild(f);
+            }
+          });
+        };
+        if (typeof MutationObserver !== 'undefined') {
+          var obs = new MutationObserver(purge);
+          obs.observe(document.documentElement, { childList: true, subtree: true });
+        }
+        document.addEventListener('DOMContentLoaded', purge);
+        window.addEventListener('load', purge);
+      })();
     </script>
   </head>
   <body class="bg-[#E6E9EE] text-[#0F172A] antialiased selection:bg-neutral-300 selection:text-neutral-900">

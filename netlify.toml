@@ -33,6 +33,13 @@
     Content-Type = "text/plain"
     Cache-Control = "public, max-age=86400"
 
+# Bloquear script del HUD / badge publico de Netlify
+[[redirects]]
+  from = "/.netlify/scripts/hud*"
+  to = "/index.html"
+  status = 404
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
