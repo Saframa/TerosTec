@@ -3,14 +3,218 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TerosTec - Ingenieria de Software & Soluciones Digitales</title>
-    <meta name="description" content="Tecnologia y diseño boutique: creamos las herramientas digitales que tu negocio necesita para operar y vender mejor. Soluciones a medida, automatizaciones y plataformas web de alto impacto." />
+    
+    <!-- 1. METADATOS Y HEADERS (SEO BASICO) -->
+    <!-- Formato: Nombre del Proyecto | Propuesta de valor (max 60 caracteres: 51 chars) -->
+    <title>TerosTec | Software Boutique &amp; Soluciones Digitales</title>
+    <!-- Meta description clara y atractiva (120-155 caracteres: 140 chars) -->
+    <meta name="description" content="Desarrollo de software boutique, sistemas a medida, automatizaciones y plataformas web de alto impacto en Montevideo y con alcance global." />
+    <!-- Canonical apuntando a la URL final sin query params -->
+    <link rel="canonical" href="https://terostec.com/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="TerosTec" />
+    <meta name="keywords" content="software boutique, desarrollo a medida, plataformas web, automatizaciones n8n, bots whatsapp, ingenieria de software, uruguay, montevideo" />
+
+    <!-- 2. OPEN GRAPH & TWITTER CARDS -->
+    <meta property="og:site_name" content="TerosTec" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="TerosTec | Software Boutique &amp; Soluciones Digitales" />
+    <meta property="og:description" content="Desarrollo de software boutique, sistemas a medida, automatizaciones y plataformas web de alto impacto en Montevideo y con alcance global." />
+    <meta property="og:url" content="https://terostec.com/" />
+    <meta property="og:image" content="https://terostec.com/og-image.png" />
+    <meta property="og:image:secure_url" content="https://terostec.com/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="TerosTec - Software Boutique &amp; Soluciones Digitales" />
+    <meta property="og:locale" content="es_UY" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TerosTec | Software Boutique &amp; Soluciones Digitales" />
+    <meta name="twitter:description" content="Desarrollo de software boutique, sistemas a medida, automatizaciones y plataformas web de alto impacto en Montevideo y con alcance global." />
+    <meta name="twitter:image" content="https://terostec.com/og-image.png" />
+
+    <!-- 3. ASSETS DE IDENTIDAD VISUAL (FAVICONS & PWA) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#E6E9EE" />
+
+    <!-- Tipografia e hiperconexiones -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- 4. DATOS ESTRUCTURADOS (JSON-LD / SCHEMA.ORG) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://terostec.com/#website",
+          "name": "TerosTec",
+          "alternateName": ["TerosTec Software Boutique", "TerosTec Uruguay"],
+          "url": "https://terostec.com/",
+          "inLanguage": ["es-UY", "en-US"],
+          "description": "Desarrollo de software boutique, sistemas a medida y automatizaciones de procesos."
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://terostec.com/#organization",
+          "name": "TerosTec",
+          "url": "https://terostec.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://terostec.com/favicon.svg",
+            "width": 64,
+            "height": 64
+          },
+          "image": "https://terostec.com/og-image.png",
+          "email": "terostecuy@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Montevideo",
+            "addressCountry": "UY"
+          },
+          "areaServed": [
+            {
+              "@type": "Country",
+              "name": "Uruguay"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Global"
+            }
+          ],
+          "founder": [
+            {
+              "@type": "Person",
+              "name": "Marcelo Scalone",
+              "jobTitle": "Co-Founder & Software Engineer",
+              "sameAs": "https://www.linkedin.com/in/marcelo-scalone-566396344/"
+            },
+            {
+              "@type": "Person",
+              "name": "Mateo Varela",
+              "jobTitle": "Co-Founder & Software Engineer",
+              "sameAs": "https://www.linkedin.com/in/mateo-varela-956402327/"
+            },
+            {
+              "@type": "Person",
+              "name": "Kevin Jaffe",
+              "jobTitle": "Co-Founder & Software Engineer",
+              "sameAs": "https://www.linkedin.com/in/kevin-jaffe-8847443b3/"
+            },
+            {
+              "@type": "Person",
+              "name": "Franco Suna",
+              "jobTitle": "Co-Founder & Software Engineer"
+            }
+          ],
+          "sameAs": [
+            "https://github.com/Saframa/TerosTec",
+            "https://www.linkedin.com/in/marcelo-scalone-566396344/",
+            "https://www.linkedin.com/in/mateo-varela-956402327/",
+            "https://www.linkedin.com/in/kevin-jaffe-8847443b3/"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Soluciones de Software",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Presencia Web & Alta Conversion",
+                  "description": "Landing pages, cotizadores interactivos y sistemas de reservas."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Comercio & Operaciones B2B",
+                  "description": "Tiendas online, catalogos B2B mayoristas y portales de clientes."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Automatizaciones & Bots",
+                  "description": "Bots de WhatsApp automatizados e integraciones de APIs con n8n y Make."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Software a Medida & Sistemas Internos",
+                  "description": "Dashboards BI, control de stock, apps moviles PWA y MVPs completos."
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body class="bg-[#E6E9EE] text-[#0F172A] antialiased selection:bg-neutral-300 selection:text-neutral-900">
-    <div id="root"></div>
+    <!-- 5. PRE-RENDERIZADO SEMANTICO PARA MOTORES DE BUSQUEDA Y CRAWLERS -->
+    <!-- Este contenido semantico permite que Googlebot y motores de busqueda indexen de inmediato -->
+    <!-- la estructura completa sin esperar la ejecucion de JavaScript. React hidratara/reemplazara al montar. -->
+    <div id="root">
+      <header>
+        <nav aria-label="Navegacion principal">
+          <a href="/">TerosTec - Software Boutique</a>
+          <ul>
+            <li><a href="#services">Soluciones</a></li>
+            <li><a href="#methodology">Metodologia</a></li>
+            <li><a href="#team">Equipo</a></li>
+            <li><a href="#contact">Contacto</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <section>
+          <h1>Tecnologia y diseño boutique: creamos las herramientas digitales que tu negocio necesita para operar y vender mejor.</h1>
+          <p>Desarrollamos soluciones web de alta conversion, sistemas a medida y automatizaciones de procesos con arquitectura solida y foco absoluto en resultados tangibles.</p>
+          <p><a href="#contact">Hablemos de tu Proyecto</a> | <a href="#services">Explorar Soluciones</a></p>
+        </section>
+        <section id="services">
+          <h2>Catalogo de Soluciones</h2>
+          <p>Herramientas diseñadas para acelerar la operativa y los ingresos de tu empresa.</p>
+          <ul>
+            <li><strong>Pilar 01: Presencia Web &amp; Alta Conversion:</strong> Landing Pages, Cotizadores Web y Sistemas de Reservas.</li>
+            <li><strong>Pilar 02: Comercio &amp; Operaciones B2B:</strong> Tiendas Online, Catalogos B2B y Portales de Clientes Extranet.</li>
+            <li><strong>Pilar 03: Automatizaciones &amp; Bots:</strong> Bots de WhatsApp Automatizados e Integracion de APIs (n8n / Make).</li>
+            <li><strong>Pilar 04: Software a Medida &amp; Sistemas Internos:</strong> Dashboards BI, Control de Stock, Apps PWA y MVPs.</li>
+          </ul>
+        </section>
+        <section id="methodology">
+          <h2>Metodologia de Trabajo</h2>
+          <p>Bases solidas de Ingenieria de Software: Relevamiento &amp; Arquitectura, Desarrollo Guiado por Calidad, Verificacion &amp; Pruebas, Despliegue &amp; Ciclo de Vida.</p>
+        </section>
+        <section id="team">
+          <h2>Equipo de Ingenieria</h2>
+          <p>Marcelo Scalone, Mateo Varela, Kevin Jaffe y Franco Suna. Estudiantes avanzados de Ingenieria en Computacion (UdelaR) y Tecnologo en Informatica (UTEC).</p>
+        </section>
+        <section id="contact">
+          <h2>Contacto Directo</h2>
+          <p>Escribenos a <a href="mailto:terostecuy@gmail.com">terostecuy@gmail.com</a>. Ubicacion: Montevideo, Uruguay con alcance global.</p>
+        </section>
+      </main>
+      <footer>
+        <p>&copy; 2026 TerosTec. Todos los derechos reservados. Montevideo, Uruguay.</p>
+      </footer>
+    </div>
+
     <!-- Formulario estatico para que Netlify Forms lo detecte durante la compilacion -->
     <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
       <input type="text" name="name" />
@@ -19,6 +223,7 @@
       <input type="text" name="service" />
       <textarea name="message"></textarea>
     </form>
+    
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

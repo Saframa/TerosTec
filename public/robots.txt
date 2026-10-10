@@ -1,0 +1,6 @@
+# robots.txt for TerosTec
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://terostec.com/sitemap.xml
