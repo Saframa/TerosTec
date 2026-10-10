@@ -2,8 +2,20 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { ArrowUpRight, ChevronDown, Layers, Target, Cpu, MapPin } from 'lucide-react';
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  introProgress?: number;
+}
+
+export const Hero: React.FC<HeroProps> = ({ introProgress }) => {
   const { t } = useLanguage();
+
+  const isIntroControlled = introProgress !== undefined;
+  const revealProgress = isIntroControlled
+    ? introProgress <= 0.35
+      ? 0
+      : Math.min(1, (introProgress - 0.35) / 0.6)
+    : 1;
+  const translateY = isIntroControlled ? (1 - revealProgress) * 35 : 0;
 
   const valueProps = [
     {
@@ -33,7 +45,14 @@ export const Hero: React.FC = () => {
   ];
 
   return (
-    <section className="relative pt-12 pb-20 sm:pt-20 sm:pb-28 overflow-hidden">
+    <section
+      style={{
+        opacity: revealProgress,
+        transform: `translate3d(0, ${translateY}px, 0)`,
+        willChange: 'opacity, transform',
+      }}
+      className="relative pt-12 pb-20 sm:pt-20 sm:pb-28 overflow-hidden transition-none"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Titular Principal y Propuesta de Valor */}
         <div className="max-w-4xl mx-auto text-center space-y-7">

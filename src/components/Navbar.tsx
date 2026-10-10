@@ -5,12 +5,26 @@ import { ArrowUpRight, Menu, X, Globe } from 'lucide-react';
 
 interface NavbarProps {
   onOpenPortfolio?: () => void;
+  introProgress?: number;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio, introProgress }) => {
   const { language, toggleLanguage, t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logoClicks, setLogoClicks] = useState(0);
+
+  const isIntroControlled = introProgress !== undefined;
+  const headerOpacity = isIntroControlled
+    ? introProgress <= 0.35
+      ? 0
+      : Math.min(1, (introProgress - 0.35) / 0.6)
+    : 1;
+  const headerPointerEvents = isIntroControlled
+    ? introProgress >= 0.85
+      ? 'auto'
+      : 'none'
+    : 'auto';
+  const logoOpacity = isIntroControlled ? (introProgress >= 0.95 ? 1 : 0) : 1;
 
   const handleLogoClick = (e: React.MouseEvent) => {
     // Secret trigger para abrir el portafolio si se hace clic 5 veces seguidas
@@ -34,7 +48,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full glass-nav transition-all">
+    <header
+      style={{ opacity: headerOpacity, pointerEvents: headerPointerEvents as 'auto' | 'none' }}
+      className="sticky top-0 z-50 w-full glass-nav transition-opacity duration-200"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
         {/* Monograma y Logotipo */}
         <a
@@ -43,7 +60,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
           className="flex items-center gap-3.5 group select-none"
           title="TerosTec"
         >
-          <div className="w-9 h-9 rounded-xl bg-[#0F172A] text-white flex items-center justify-center font-bold text-sm tracking-tighter shadow-sm transition-transform group-hover:scale-105">
+          <div
+            id="navbar-logo-target"
+            style={{ opacity: logoOpacity }}
+            className="w-9 h-9 rounded-xl bg-[#0F172A] text-white flex items-center justify-center font-bold text-sm tracking-tighter shadow-sm transition-opacity group-hover:scale-105"
+          >
             TT
           </div>
           <div className="flex flex-col">

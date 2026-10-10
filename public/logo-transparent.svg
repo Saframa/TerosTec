@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="logoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <filter id="logoShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#0F172A" flood-opacity="0.25" />
+    </filter>
+  </defs>
+  
+  <!-- Transparent Canvas -->
+  <!-- Rounded Monogram Box -->
+  <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#logoBg)" stroke="#334155" stroke-width="8" filter="url(#logoShadow)" />
+  <rect x="36" y="36" width="440" height="440" rx="108" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="3" />
+  
+  <!-- Monogram TT Bold Typography -->
+  <text x="256" y="278" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, sans-serif" font-size="220" font-weight="800" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" letter-spacing="-12">TT</text>
+</svg>
