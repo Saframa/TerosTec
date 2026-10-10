@@ -17,8 +17,15 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo y Descripción */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-[#0F172A] text-white flex items-center justify-center font-bold text-xs tracking-tighter">
-              TT
+            <div className="w-8 h-8 rounded-xl bg-[#0F172A] flex items-center justify-center p-1.5 shadow-xs">
+              <img
+                src="/logo-icon-white.png"
+                alt="TerosTec"
+                width={20}
+                height={20}
+                className="w-5 h-5 object-contain"
+                decoding="async"
+              />
             </div>
             <div>
               <span className="font-semibold text-base tracking-tight text-[#0F172A]">

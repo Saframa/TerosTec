@@ -15,16 +15,20 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio, introProgress }
 
   const isIntroControlled = introProgress !== undefined;
   const headerOpacity = isIntroControlled
-    ? introProgress <= 0.35
+    ? introProgress <= 0.75
       ? 0
-      : Math.min(1, (introProgress - 0.35) / 0.6)
+      : Math.min(1, (introProgress - 0.75) / 0.25)
     : 1;
   const headerPointerEvents = isIntroControlled
-    ? introProgress >= 0.85
+    ? introProgress >= 0.95
       ? 'auto'
       : 'none'
     : 'auto';
-  const logoOpacity = isIntroControlled ? (introProgress >= 0.95 ? 1 : 0) : 1;
+  const logoOpacity = isIntroControlled
+    ? introProgress >= 0.96
+      ? Math.min(1, (introProgress - 0.96) / 0.04)
+      : 0
+    : 1;
 
   const handleLogoClick = (e: React.MouseEvent) => {
     // Secret trigger para abrir el portafolio si se hace clic 5 veces seguidas
@@ -50,7 +54,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio, introProgress }
   return (
     <header
       style={{ opacity: headerOpacity, pointerEvents: headerPointerEvents as 'auto' | 'none' }}
-      className="sticky top-0 z-50 w-full glass-nav transition-opacity duration-200"
+      className="fixed top-0 left-0 right-0 z-40 w-full glass-nav transition-opacity duration-200"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
         {/* Monograma y Logotipo */}
@@ -63,9 +67,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio, introProgress }
           <div
             id="navbar-logo-target"
             style={{ opacity: logoOpacity }}
-            className="w-9 h-9 rounded-xl bg-[#0F172A] text-white flex items-center justify-center font-bold text-sm tracking-tighter shadow-sm transition-opacity group-hover:scale-105"
+            className="w-9 h-9 rounded-xl bg-[#0F172A] flex items-center justify-center p-1.5 shadow-sm transition-opacity group-hover:scale-105"
           >
-            TT
+            <img
+              src="/logo-icon-white.png"
+              alt="TerosTec"
+              width={24}
+              height={24}
+              className="w-6 h-6 object-contain"
+              decoding="async"
+            />
           </div>
           <div className="flex flex-col">
             <span className="font-semibold text-lg tracking-tight text-[#0F172A] group-hover:text-black transition-colors">

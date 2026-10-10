@@ -13,8 +13,33 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
   const [targetPos, setTargetPos] = useState({ x: 42, y: 36 });
   const [mounted, setMounted] = useState(false);
 
-  // Distancia de scroll necesaria para completar la animacion diagonal
-  const SCROLL_DISTANCE = 340;
+  // Distancia total de scroll necesaria para completar la trayectoria diagonal
+  const SCROLL_DISTANCE = 420;
+
+  // Calculo preciso de las coordenadas del blanco en el header fijo
+  const computeTarget = () => {
+    if (typeof window === 'undefined') return { x: 42, y: 36 };
+
+    const el = document.getElementById('navbar-logo-target');
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        return {
+          x: rect.left + rect.width / 2,
+          y: rect.top + rect.height / 2,
+        };
+      }
+    }
+
+    // Calculo de contingencia para el navbar fijo (altura 72px, centrado y=36)
+    const isMobile = window.innerWidth < 640;
+    const paddingX = isMobile ? 16 : window.innerWidth < 1024 ? 24 : 32;
+    const containerLeft = Math.max(0, (window.innerWidth - 1280) / 2);
+    return {
+      x: containerLeft + paddingX + 18,
+      y: 36,
+    };
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -24,23 +49,22 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
         width: window.innerWidth,
         height: window.innerHeight,
       });
-
-      const targetEl = document.getElementById('navbar-logo-target');
-      if (targetEl) {
-        const rect = targetEl.getBoundingClientRect();
-        setTargetPos({
-          x: rect.left + rect.width / 2,
-          y: rect.top + rect.height / 2,
-        });
-      }
+      setTargetPos(computeTarget());
     };
 
+    let ticking = false;
     const handleScroll = () => {
-      const currentScroll = window.scrollY;
-      setScrollY(currentScroll);
-      const p = Math.min(1, Math.max(0, currentScroll / SCROLL_DISTANCE));
-      if (onProgressChange) {
-        onProgressChange(p);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScroll = window.scrollY;
+          setScrollY(currentScroll);
+          const p = Math.min(1, Math.max(0, currentScroll / SCROLL_DISTANCE));
+          if (onProgressChange) {
+            onProgressChange(p);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
@@ -50,29 +74,30 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', updateMeasurements);
 
-    // Reintentar medir cuando los elementos terminen de renderizarse
-    const timer = setTimeout(updateMeasurements, 200);
+    const timer1 = setTimeout(updateMeasurements, 80);
+    const timer2 = setTimeout(updateMeasurements, 400);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', updateMeasurements);
-      clearTimeout(timer);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
     };
   }, [onProgressChange]);
 
   if (!mounted) return null;
 
-  // Calculo de progreso normalizado [0 a 1]
+  // Progreso normalizado de 0 a 1
   const progress = Math.min(1, Math.max(0, scrollY / SCROLL_DISTANCE));
-  
-  // Curva de desaceleracion suave estilo Apple (Cubic ease-out)
-  const easedP = 1 - Math.pow(1 - progress, 2.4);
 
-  // Posicion inicial: centro exacto del viewport
+  // Curva de desaceleración suave estilo Apple (Cubic ease-out)
+  const easedP = 1 - Math.pow(1 - progress, 2.2);
+
+  // Origen: centro exacto del viewport
   const startX = windowSize.width / 2;
   const startY = windowSize.height / 2;
 
-  // Posicion final: ancla exacta del monograma en el header
+  // Destino: icono del logo en el navbar fijo
   const endX = targetPos.x > 0 ? targetPos.x : 48;
   const endY = targetPos.y > 0 ? targetPos.y : 36;
 
@@ -80,16 +105,49 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
   const currentX = startX + (endX - startX) * easedP;
   const currentY = startY + (endY - startY) * easedP;
 
-  // Escala: de 1.0 (130px) a 0.28 (~36px para encajar en el header)
-  const currentScale = 1 - (1 - 36 / 130) * easedP;
+  // Tamaño del emblema: inicial en el centro -> destino en el navbar (24px)
+  const startEmblemSize = Math.min(110, Math.max(76, windowSize.width * 0.22));
+  const targetEmblemSize = 24;
+  const currentEmblemSize = startEmblemSize + (targetEmblemSize - startEmblemSize) * easedP;
 
-  // Opacidad del logo flotante: visible durante el viaje, se oculta cuando ya atraco en el header
+  // Transición de badge oscuro y color blanco al aproximarse al header (progreso 0.75 a 1.0)
+  const badgeOpacity = Math.max(0, Math.min(1, (progress - 0.75) / 0.25));
+  const whiteOpacity = Math.max(0, Math.min(1, (progress - 0.75) / 0.25));
+
+  // Opacidad del fondo de aluminio inicial (se desvanece de 0 a 0.25 de scroll)
+  const aluminumOpacity = Math.max(0, 1 - progress / 0.25);
+
+  // El logo flotante se oculta al atracar completamente para ceder el control al navbar
   const isDocked = progress >= 0.98;
+
+  const handleExploreClick = () => {
+    window.scrollTo({ top: SCROLL_DISTANCE, behavior: 'smooth' });
+  };
 
   return (
     <>
-      {/* Spacer inicial que permite el recorrido de scroll fluido */}
-      <div className="h-[25vh] sm:h-[30vh] pointer-events-none" aria-hidden="true" />
+      {/* Pista de scroll que proporciona la distancia física para la animación diagonal */}
+      <div className="h-[420px] pointer-events-none" aria-hidden="true" />
+
+      {/* Escenario inicial: Logo sobre fondo de aluminio */}
+      {aluminumOpacity > 0.01 && (
+        <div
+          className="fixed inset-0 z-30 pointer-events-none flex items-center justify-center p-4 transition-opacity duration-150"
+          style={{ opacity: aluminumOpacity }}
+          aria-hidden="true"
+        >
+          <div className="relative w-[88vw] max-w-[500px] aspect-[1024/559] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/40 ring-1 ring-black/10 select-none">
+            <img
+              src="/logo-aluminum.jpg"
+              alt="TerosTec Aluminium Logo"
+              className="w-full h-full object-cover"
+              draggable={false}
+            />
+            {/* Sutil resplandor de iluminación metálica */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-black/5 via-transparent to-white/15 pointer-events-none" />
+          </div>
+        </div>
+      )}
 
       {/* Logo flotante animado en diagonal */}
       {!isDocked && (
@@ -98,37 +156,68 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
           style={{
             left: `${currentX}px`,
             top: `${currentY}px`,
-            transform: `translate(-50%, -50%) scale(${currentScale})`,
-            willChange: 'transform, left, top',
+            transform: 'translate(-50%, -50%)',
+            willChange: 'left, top',
           }}
           aria-hidden="true"
         >
-          <div className="relative flex flex-col items-center justify-center">
-            {/* Imagen PNG de alta resolucion con fondo transparente */}
+          <div className="relative flex items-center justify-center">
+            {/* Contenedor oscuro redondeado que se materializa al aproximarse al navbar */}
+            <div
+              className="absolute rounded-xl bg-[#0F172A] shadow-sm transition-opacity"
+              style={{
+                opacity: badgeOpacity,
+                width: `${Math.max(36, currentEmblemSize + 12)}px`,
+                height: `${Math.max(36, currentEmblemSize + 12)}px`,
+              }}
+            />
+
+            {/* Emblema oscuro original */}
             <img
-              src="/logo-transparent.png"
-              alt="TerosTec Logo"
-              width={130}
-              height={130}
-              className="w-32 h-32 object-contain drop-shadow-md"
+              src="/logo-icon.png"
+              alt="TerosTec"
+              width={startEmblemSize}
+              height={startEmblemSize}
+              style={{
+                width: `${currentEmblemSize}px`,
+                height: `${currentEmblemSize}px`,
+                opacity: 1 - whiteOpacity,
+              }}
+              className="relative object-contain transition-none"
+              decoding="async"
+            />
+
+            {/* Emblema blanco invertido para acoplar con el navbar */}
+            <img
+              src="/logo-icon-white.png"
+              alt="TerosTec"
+              width={startEmblemSize}
+              height={startEmblemSize}
+              style={{
+                width: `${currentEmblemSize}px`,
+                height: `${currentEmblemSize}px`,
+                opacity: whiteOpacity,
+              }}
+              className="absolute object-contain transition-none"
               decoding="async"
             />
           </div>
         </div>
       )}
 
-      {/* Indicador de ayuda al inicio ("Desliza para explorar") */}
+      {/* Indicador interactivo al inicio ("Desliza para explorar") */}
       {progress < 0.15 && (
-        <div
-          className="fixed bottom-10 left-1/2 -translate-x-1/2 z-40 pointer-events-none transition-opacity duration-300 flex flex-col items-center gap-1.5"
+        <button
+          onClick={handleExploreClick}
+          className="fixed bottom-10 left-1/2 -translate-x-1/2 z-30 pointer-events-auto transition-opacity duration-300 flex flex-col items-center gap-1.5 group cursor-pointer focus:outline-none"
           style={{ opacity: 1 - progress / 0.15 }}
-          aria-hidden="true"
+          aria-label={language === 'es' ? 'Deslizar para explorar' : 'Scroll to explore'}
         >
-          <span className="text-[11px] font-mono tracking-widest uppercase text-[#64748B] font-semibold">
+          <span className="text-[11px] font-mono tracking-widest uppercase text-[#64748B] font-semibold group-hover:text-[#0F172A] transition-colors">
             {language === 'es' ? 'Desliza para explorar' : 'Scroll to explore'}
           </span>
-          <ChevronDown className="w-4 h-4 text-[#64748B] animate-bounce" />
-        </div>
+          <ChevronDown className="w-4 h-4 text-[#64748B] group-hover:text-[#0F172A] animate-bounce transition-colors" />
+        </button>
       )}
     </>
   );

@@ -11,11 +11,12 @@ export const Hero: React.FC<HeroProps> = ({ introProgress }) => {
 
   const isIntroControlled = introProgress !== undefined;
   const revealProgress = isIntroControlled
-    ? introProgress <= 0.35
+    ? introProgress <= 0.75
       ? 0
-      : Math.min(1, (introProgress - 0.35) / 0.6)
+      : Math.min(1, (introProgress - 0.75) / 0.25)
     : 1;
-  const translateY = isIntroControlled ? (1 - revealProgress) * 35 : 0;
+  const translateY = isIntroControlled ? (1 - revealProgress) * 24 : 0;
+  const pointerEvents = isIntroControlled ? (revealProgress >= 0.95 ? 'auto' : 'none') : 'auto';
 
   const valueProps = [
     {
@@ -49,9 +50,10 @@ export const Hero: React.FC<HeroProps> = ({ introProgress }) => {
       style={{
         opacity: revealProgress,
         transform: `translate3d(0, ${translateY}px, 0)`,
+        pointerEvents: pointerEvents as 'auto' | 'none',
         willChange: 'opacity, transform',
       }}
-      className="relative pt-12 pb-20 sm:pt-20 sm:pb-28 overflow-hidden transition-none"
+      className="relative pt-20 pb-20 sm:pt-28 sm:pb-28 overflow-hidden transition-none"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Titular Principal y Propuesta de Valor */}
