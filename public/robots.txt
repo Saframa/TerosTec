@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://terostec.com/sitemap.xml
+Sitemap: https://terostec.netlify.app/sitemap.xml
