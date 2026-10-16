@@ -85,8 +85,9 @@ export const Contact: React.FC = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const honey = (e.currentTarget.elements.namedItem('_honey') as HTMLInputElement | null)?.value ?? '';
 
     if (isRateLimited) {
       return;
@@ -111,6 +112,7 @@ export const Contact: React.FC = () => {
           _subject: `Nuevo Proyecto TerosTec: ${formData.name} (${formData.service})`,
           _template: 'table',
           _captcha: 'false',
+          _honey: honey,
         }),
       });
 
@@ -255,16 +257,18 @@ export const Contact: React.FC = () => {
                 </div>
               ) : (
                 <form
-                  name="contact"
-                  method="POST"
-                  data-netlify="true"
-                  data-netlify-honeypot="bot-field"
                   onSubmit={handleSubmit}
                   className="space-y-5"
                 >
-                  {/* Campos ocultos requeridos por Netlify Forms */}
-                  <input type="hidden" name="form-name" value="contact" />
-                  <input type="hidden" name="bot-field" />
+                  {/* Honeypot anti-spam de FormSubmit: invisible para personas, los bots lo rellenan */}
+                  <input
+                    type="text"
+                    name="_honey"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    style={{ display: 'none' }}
+                  />
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-xs font-semibold uppercase tracking-wider text-[#475569] mb-1.5">

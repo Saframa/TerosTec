@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { LanguageProvider } from './context/LanguageContext';
+import type { Language } from './i18n/translations';
 import { BackgroundEffect } from './components/BackgroundEffect';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -71,9 +72,9 @@ export const AppContent: React.FC = () => {
   );
 };
 
-export const App: React.FC = () => {
+export const App: React.FC<{ initialLanguage?: Language }> = ({ initialLanguage = 'es' }) => {
   return (
-    <LanguageProvider>
+    <LanguageProvider initialLanguage={initialLanguage}>
       <AppContent />
     </LanguageProvider>
   );

@@ -10,26 +10,31 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('terostec_lang') as Language;
-      if (saved === 'es' || saved === 'en') {
-        return saved;
-      }
-      const browserLang = navigator.language?.toLowerCase() || '';
-      if (browserLang.startsWith('en')) {
-        return 'en';
-      }
-    }
-    return 'es';
-  });
+// Cada idioma tiene su propia URL prerenderizada (/ y /en/), así que el idioma
+// inicial lo decide la página y no el navegador: el HTML del servidor y la
+// hidratación siempre coinciden.
+export const LANGUAGE_PATHS: Record<Language, string> = { es: '/', en: '/en/' };
 
+const TITLES: Record<Language, string> = {
+  es: 'TerosTec | Software Boutique & Soluciones Digitales',
+  en: 'TerosTec | Boutique Software & Digital Solutions',
+};
+
+export const LanguageProvider: React.FC<{ children: React.ReactNode; initialLanguage?: Language }> = ({
+  children,
+  initialLanguage = 'es',
+}) => {
+  const [language, setLanguageState] = useState<Language>(initialLanguage);
+
+  // Cambia el idioma en el lugar (sin recargar, conservando animaciones y scroll)
+  // y deja la URL apuntando a la versión indexable de ese idioma.
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     if (typeof window !== 'undefined') {
-      localStorage.setItem('terostec_lang', lang);
-      document.documentElement.lang = lang;
+      const target = LANGUAGE_PATHS[lang] + window.location.hash;
+      if (window.location.pathname !== LANGUAGE_PATHS[lang]) {
+        window.history.replaceState(null, '', target);
+      }
     }
   };
 
@@ -38,13 +43,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      document.documentElement.lang = language;
-      document.title =
-        language === 'es'
-          ? 'TerosTec | Software Boutique & Soluciones Digitales'
-          : 'TerosTec | Boutique Software & Digital Solutions';
-    }
+    document.documentElement.lang = language;
+    document.title = TITLES[language];
   }, [language]);
 
   const t = (key: string): string => {

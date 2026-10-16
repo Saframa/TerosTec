@@ -65,7 +65,8 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="mt-8 pt-6 border-t border-black/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#94A3B8]">
-          <p>
+          {/* El año se calcula al compilar; si el cliente ya está en el año siguiente, no es un error */}
+          <p suppressHydrationWarning>
             (c) {currentYear} {siteConfig.name}. {t('footer_rights')}
           </p>
           <p>
