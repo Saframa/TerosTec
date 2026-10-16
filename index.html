@@ -45,10 +45,8 @@
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#E6E9EE" />
 
-    <!-- Tipografía e hiperconexiones -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tipografía: Inter autoalojada (sin Google Fonts, sin bloquear el render) -->
+    <link rel="preload" href="/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- 4. DATOS ESTRUCTURADOS (JSON-LD / SCHEMA.ORG) -->
     <script type="application/ld+json">
@@ -165,27 +163,6 @@
       ]
     </script>
 
-    <!-- Supresión activa de insignias y widgets inyectados -->
-    <script>
-      (function() {
-        var purge = function() {
-          var frames = document.querySelectorAll(
-            '#nl-badge-frame, #nl-hud-frame, iframe[title*="Netlify"], iframe[id^="nl-"], netlify-drawer, [data-netlify-drawer]'
-          );
-          frames.forEach(function(f) {
-            if (f && f.parentNode) {
-              f.parentNode.removeChild(f);
-            }
-          });
-        };
-        if (typeof MutationObserver !== 'undefined') {
-          var obs = new MutationObserver(purge);
-          obs.observe(document.documentElement, { childList: true, subtree: true });
-        }
-        document.addEventListener('DOMContentLoaded', purge);
-        window.addEventListener('load', purge);
-      })();
-    </script>
     <!-- ESTILOS CRITICOS DEL PRELOADER CON LLENADO DE LOGO -->
     <style>
       @keyframes logoFillUp {
@@ -310,32 +287,9 @@
       </footer>
     </div>
 
-    <!-- CONTROL DEL CICLO DE VIDA DEL PRELOADER -->
-    <script>
-      (function() {
-        var isHash = window.location.hash && window.location.hash.length > 1;
-        var p = document.getElementById('app-preloader');
-        if (isHash && p) {
-          p.style.display = 'none';
-          document.body.classList.remove('preloading');
-          return;
-        }
-
-        var finish = function() {
-          if (!p || p.classList.contains('loaded')) return;
-          p.classList.add('loaded');
-          p.style.opacity = '0';
-          setTimeout(function() {
-            p.style.visibility = 'hidden';
-            p.style.display = 'none';
-            document.body.classList.remove('preloading');
-          }, 350);
-        };
-
-        // Completar tras la animación de llenado (1.3s)
-        setTimeout(finish, 1300);
-      })();
-    </script>
+    <!-- ARRANQUE: purga de insignias de Netlify + ciclo de vida del preloader
+         (externo para permitir CSP estricta con script-src 'self') -->
+    <script src="/boot.js"></script>
 
     <!-- Formulario estático para que Netlify Forms lo detecte durante la compilación -->
     <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>

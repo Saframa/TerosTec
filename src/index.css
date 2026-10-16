@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Inter autoalojada (fuente variable, cubre los pesos 400-800).
+   font-display: swap evita texto invisible mientras carga. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter-latin-variable.woff2") format("woff2");
+}
+
 @layer base {
   body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
