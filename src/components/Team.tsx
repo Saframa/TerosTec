@@ -30,10 +30,25 @@ export const Team: React.FC = () => {
               className="apple-card rounded-2xl p-6 flex flex-col justify-between group"
             >
               <div>
-                {/* Avatar Iniciales */}
+                {/* Avatar / Fotografía */}
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-14 h-14 rounded-2xl bg-[#0F172A] text-white flex items-center justify-center font-bold text-lg tracking-tight shadow-sm">
-                    {member.avatarInitials}
+                  <div className="w-16 h-16 rounded-2xl bg-[#0F172A] overflow-hidden border border-black/8 shadow-xs relative flex items-center justify-center text-white font-bold text-lg group-hover:scale-[1.03] transition-transform duration-300">
+                    {member.image ? (
+                      <picture>
+                        <source srcSet={member.image} type="image/webp" />
+                        <img
+                          src={member.image.replace('.webp', '.jpg')}
+                          alt={member.name}
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-cover object-center"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </picture>
+                    ) : (
+                      member.avatarInitials
+                    )}
                   </div>
                   {member.linkedinUrl && (
                     <a

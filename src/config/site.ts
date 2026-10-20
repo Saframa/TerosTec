@@ -4,6 +4,7 @@ export interface TeamMember {
   role: string;
   academicKey: string;
   avatarInitials: string;
+  image?: string;
   linkedinUrl?: string;
 }
 
@@ -25,6 +26,7 @@ export const siteConfig = {
       role: "Co-Founder & Software Engineer",
       academicKey: "badge_marcelo",
       avatarInitials: "MS",
+      image: "/team/marcelo-scalone.webp",
       linkedinUrl: "https://www.linkedin.com/in/marcelo-scalone-566396344/",
     },
     {
@@ -33,6 +35,7 @@ export const siteConfig = {
       role: "Co-Founder & Software Engineer",
       academicKey: "badge_mateo",
       avatarInitials: "MV",
+      image: "/team/mateo-varela.webp",
       linkedinUrl: "https://www.linkedin.com/in/mateo-varela-956402327/",
     },
     {
@@ -41,6 +44,7 @@ export const siteConfig = {
       role: "Co-Founder & Software Engineer",
       academicKey: "badge_kevin",
       avatarInitials: "KJ",
+      image: "/team/kevin-jaffe.webp",
       linkedinUrl: "https://www.linkedin.com/in/kevin-jaffe-8847443b3/",
     },
     {
@@ -49,6 +53,7 @@ export const siteConfig = {
       role: "Co-Founder & Software Engineer",
       academicKey: "badge_franco",
       avatarInitials: "FS",
+      image: "/team/franco-suna.webp",
     },
   ] as TeamMember[],
 };

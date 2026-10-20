@@ -70,6 +70,7 @@ const structuredData = {
         '@type': 'Person',
         name: m.name,
         jobTitle: m.role,
+        ...(m.image ? { image: `${SITE}${m.image}` } : {}),
         ...(m.linkedinUrl ? { sameAs: m.linkedinUrl } : {}),
       })),
       sameAs: [
