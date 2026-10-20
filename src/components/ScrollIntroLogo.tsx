@@ -85,7 +85,35 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
     };
   }, [onProgressChange]);
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return (
+      <>
+        {/* Pista de scroll que proporciona la distancia física para la animación diagonal */}
+        <div className="h-[220px] pointer-events-none" aria-hidden="true" />
+
+        {/* Indicador interactivo inicial visible desde el primer instante (SSR + cliente) */}
+        <button
+          className="fixed bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 z-30 pointer-events-auto transition-opacity duration-300 flex flex-col items-center gap-2.5 sm:gap-3 group cursor-pointer focus:outline-none"
+          aria-label={language === 'es' ? 'Deslizar para explorar' : 'Scroll to explore'}
+        >
+          <span
+            className="text-xl sm:text-2xl font-bold tracking-widest uppercase text-[#334155] group-hover:text-[#0F172A] whitespace-nowrap transition-colors"
+            style={{
+              fontSize: 'clamp(1.15rem, 2.5vw, 1.5rem)',
+              fontWeight: 700,
+              letterSpacing: '0.15em',
+            }}
+          >
+            {language === 'es' ? 'Desliza para explorar' : 'Scroll to explore'}
+          </span>
+          <ChevronDown
+            className="w-7 h-7 sm:w-8 sm:h-8 text-[#334155] group-hover:text-[#0F172A] animate-bounce transition-colors"
+            style={{ width: '32px', height: '32px' }}
+          />
+        </button>
+      </>
+    );
+  }
 
   // Progreso normalizado de 0 a 1
   const progress = Math.min(1, Math.max(0, scrollY / SCROLL_DISTANCE));
@@ -190,10 +218,20 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
           style={{ opacity: 1 - progress / 0.15 }}
           aria-label={language === 'es' ? 'Deslizar para explorar' : 'Scroll to explore'}
         >
-          <span className="text-xl sm:text-2xl font-bold tracking-widest uppercase text-[#475569] group-hover:text-[#0F172A] whitespace-nowrap transition-colors">
+          <span
+            className="text-xl sm:text-2xl font-bold tracking-widest uppercase text-[#334155] group-hover:text-[#0F172A] whitespace-nowrap transition-colors"
+            style={{
+              fontSize: 'clamp(1.15rem, 2.5vw, 1.5rem)',
+              fontWeight: 700,
+              letterSpacing: '0.15em',
+            }}
+          >
             {language === 'es' ? 'Desliza para explorar' : 'Scroll to explore'}
           </span>
-          <ChevronDown className="w-7 h-7 sm:w-8 sm:h-8 text-[#475569] group-hover:text-[#0F172A] animate-bounce transition-colors" />
+          <ChevronDown
+            className="w-7 h-7 sm:w-8 sm:h-8 text-[#334155] group-hover:text-[#0F172A] animate-bounce transition-colors"
+            style={{ width: '32px', height: '32px' }}
+          />
         </button>
       )}
     </>
