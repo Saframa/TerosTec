@@ -186,14 +186,14 @@ export const ScrollIntroLogo: React.FC<ScrollIntroLogoProps> = ({ onProgressChan
       {progress < 0.15 && (
         <button
           onClick={handleExploreClick}
-          className="fixed bottom-10 left-1/2 -translate-x-1/2 z-30 pointer-events-auto transition-opacity duration-300 flex flex-col items-center gap-1.5 group cursor-pointer focus:outline-none"
+          className="fixed bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 z-30 pointer-events-auto transition-opacity duration-300 flex flex-col items-center gap-2 group cursor-pointer focus:outline-none"
           style={{ opacity: 1 - progress / 0.15 }}
           aria-label={language === 'es' ? 'Deslizar para explorar' : 'Scroll to explore'}
         >
-          <span className="text-[11px] font-mono tracking-widest uppercase text-[#64748B] font-semibold group-hover:text-[#0F172A] transition-colors">
+          <span className="text-sm sm:text-base font-semibold tracking-widest uppercase text-[#475569] group-hover:text-[#0F172A] transition-colors">
             {language === 'es' ? 'Desliza para explorar' : 'Scroll to explore'}
           </span>
-          <ChevronDown className="w-4 h-4 text-[#64748B] group-hover:text-[#0F172A] animate-bounce transition-colors" />
+          <ChevronDown className="w-5 h-5 text-[#475569] group-hover:text-[#0F172A] animate-bounce transition-colors" />
         </button>
       )}
     </>
