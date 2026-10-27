@@ -198,6 +198,17 @@ const structuredData = {
         animation: logoFillUp 1.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       }
     </style>
+    <noscript>
+      <style>
+        #app-preloader {
+          display: none !important;
+        }
+        body.preloading {
+          overflow: auto !important;
+          height: auto !important;
+        }
+      </style>
+    </noscript>
   </head>
   <body class="bg-[#E6E9EE] text-[#0F172A] antialiased selection:bg-neutral-300 selection:text-neutral-900 preloading">
     <!-- PRELOADER CON LLENADO ASCENDENTE DEL LOGO DE LA EMPRESA -->
