@@ -2,15 +2,24 @@
 import Page from '../layouts/Page.astro';
 ---
 
-<Page title="Página no encontrada | TerosTec" description="La página que buscas no existe o cambió de dirección." noindex>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24">
-    <h1 class="display-title text-4xl sm:text-5xl font-extrabold text-[#0F172A] tracking-tight">Página no encontrada</h1>
-    <p class="mt-6 text-lg text-[#475569] leading-relaxed">La página que buscas no existe o cambió de dirección.</p>
-    <a
-      href="/"
-      class="apple-button mt-8 inline-flex items-center px-7 py-3.5 rounded-full text-sm font-semibold bg-[#0F172A] text-white hover:bg-black shadow-md"
-    >
-      Volver al inicio
-    </a>
+<Page
+  title="Página no encontrada (404) | TerosTec"
+  description="La dirección a la que intentas acceder no existe o fue movida."
+  noindex
+>
+  <div class="flex justify-center px-4 sm:px-6 pt-16 sm:pt-24">
+    <div class="max-w-md w-full text-center bg-white/70 backdrop-blur-xl border border-black/10 rounded-3xl p-8 sm:p-10 shadow-xl">
+      <h1 class="text-4xl font-bold tracking-tight text-[#0F172A] mb-2">404</h1>
+      <h2 class="text-lg font-semibold text-[#334155] mb-4">Página no encontrada</h2>
+      <p class="text-sm text-[#64748B] mb-8 leading-relaxed">
+        La dirección a la que intentas acceder no existe o fue movida.
+      </p>
+      <a
+        href="/"
+        class="inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-semibold bg-[#0F172A] text-white hover:bg-black transition-all shadow-md hover:scale-[1.02]"
+      >
+        Volver al inicio
+      </a>
+    </div>
   </div>
 </Page>
