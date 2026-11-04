@@ -71,7 +71,7 @@ export const WorkflowPipelineWidget: React.FC = () => {
             <MessageSquareCode className="w-4 h-4" />
           </div>
           <span className="text-[10px] font-bold text-[#0F172A] mt-1.5">WhatsApp</span>
-          <span className="text-[9px] text-[#64748B]">Webhook</span>
+          <span className="text-[9px] text-[#556275]">Webhook</span>
         </div>
 
         {/* Cable Luminoso 1 */}
@@ -101,7 +101,7 @@ export const WorkflowPipelineWidget: React.FC = () => {
             <Workflow className="w-4 h-4" />
           </div>
           <span className="text-[10px] font-bold text-[#0F172A] mt-1.5">n8n Engine</span>
-          <span className="text-[9px] text-[#64748B]">Parseo &amp; IA</span>
+          <span className="text-[9px] text-[#556275]">Parseo &amp; IA</span>
         </div>
 
         {/* Cable Luminoso 2 */}
@@ -131,13 +131,13 @@ export const WorkflowPipelineWidget: React.FC = () => {
             <Database className="w-4 h-4" />
           </div>
           <span className="text-[10px] font-bold text-[#0F172A] mt-1.5">PostgreSQL</span>
-          <span className="text-[9px] text-[#64748B]">Persistencia</span>
+          <span className="text-[9px] text-[#556275]">Persistencia</span>
         </div>
       </div>
 
       {/* Boton para Disparar Paquete Manual */}
       <div className="flex items-center justify-between pt-1">
-        <span className="text-[11px] text-[#64748B]">
+        <span className="text-[11px] text-[#556275]">
           {activeStep === 1
             ? (language === 'es' ? 'Recibiendo mensaje en WhatsApp...' : 'Incoming lead on WhatsApp...')
             : activeStep === 2

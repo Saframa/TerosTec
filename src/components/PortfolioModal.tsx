@@ -66,14 +66,14 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ isOpen, onClose 
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-black/5 text-[#64748B] hover:text-[#0F172A] transition-colors"
+            className="p-1.5 rounded-full hover:bg-black/5 text-[#556275] hover:text-[#0F172A] transition-colors"
             aria-label="Cerrar modal"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <p className="text-xs sm:text-sm text-[#64748B] mt-2 mb-6">
+        <p className="text-xs sm:text-sm text-[#556275] mt-2 mb-6">
           {t('portfolio_subtitle')}
         </p>
 
@@ -84,10 +84,10 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ isOpen, onClose 
               className="p-4 sm:p-5 rounded-2xl bg-white/70 border border-black/5 hover:border-black/15 transition-all"
             >
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#64748B] font-semibold">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#556275] font-semibold">
                   {proj.tag}
                 </span>
-                <span className="text-xs text-[#94A3B8]">0{proj.id}</span>
+                <span className="text-xs text-[#556275]">0{proj.id}</span>
               </div>
               <h4 className="text-base font-bold text-[#0F172A] mb-1">
                 {proj.title}

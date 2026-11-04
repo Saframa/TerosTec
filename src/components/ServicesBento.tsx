@@ -130,7 +130,7 @@ export const ServicesBento: React.FC = () => {
           <h2 className="display-title text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight mb-4">
             {t('services_section_title')}
           </h2>
-          <p className="text-base sm:text-lg text-[#64748B] leading-relaxed">
+          <p className="text-base sm:text-lg text-[#556275] leading-relaxed">
             {t('services_section_subtitle')}
           </p>
         </div>
@@ -147,7 +147,7 @@ export const ServicesBento: React.FC = () => {
               <div>
                 {/* Encabezado del Pilar */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-mono font-semibold uppercase tracking-widest text-[#64748B] px-2.5 py-1 rounded-md bg-[#E6E9EE]/80">
+                  <span className="text-xs font-mono font-semibold uppercase tracking-widest text-[#556275] px-2.5 py-1 rounded-md bg-[#E6E9EE]/80">
                     {pillar.badge}
                   </span>
                 </div>
@@ -174,7 +174,7 @@ export const ServicesBento: React.FC = () => {
                           <h4 className="text-sm font-semibold text-[#0F172A]">
                             {item.title}
                           </h4>
-                          <p className="text-xs text-[#64748B] mt-0.5 leading-relaxed">
+                          <p className="text-xs text-[#556275] mt-0.5 leading-relaxed">
                             {item.desc}
                           </p>
                         </div>

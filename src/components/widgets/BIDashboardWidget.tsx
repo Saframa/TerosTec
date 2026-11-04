@@ -65,7 +65,7 @@ export const BIDashboardWidget: React.FC = () => {
               className={`px-2 py-0.5 rounded-md font-semibold transition-all ${
                 period === p
                   ? 'bg-white text-[#0F172A] shadow-2xs'
-                  : 'text-[#64748B] hover:text-[#0F172A]'
+                  : 'text-[#556275] hover:text-[#0F172A]'
               }`}
             >
               {p}
@@ -77,7 +77,7 @@ export const BIDashboardWidget: React.FC = () => {
       {/* KPI Dinamico Reactivo al Hover */}
       <div className="flex items-center justify-between">
         <div>
-          <span className="text-[10px] font-medium text-[#64748B] uppercase tracking-wider block">
+          <span className="text-[10px] font-medium text-[#556275] uppercase tracking-wider block">
             {activeItem
               ? `${language === 'es' ? 'Seleccionado: ' : 'Selected: '} ${activeItem.day}`
               : (language === 'es' ? 'Rendimiento Promedio' : 'Average Performance')}
@@ -93,7 +93,7 @@ export const BIDashboardWidget: React.FC = () => {
           </div>
         </div>
 
-        <span className="text-[10px] text-[#94A3B8] font-mono">
+        <span className="text-[10px] text-[#556275] font-mono">
           {language === 'es' ? 'Pasa el cursor por las barras' : 'Hover over bars'}
         </span>
       </div>
@@ -132,7 +132,7 @@ export const BIDashboardWidget: React.FC = () => {
               {/* Etiqueta del Eje X */}
               <span
                 className={`text-[9px] font-mono transition-colors ${
-                  isHovered ? 'font-bold text-[#0F172A]' : 'text-[#64748B]'
+                  isHovered ? 'font-bold text-[#0F172A]' : 'text-[#556275]'
                 }`}
               >
                 {item.day}
@@ -143,7 +143,7 @@ export const BIDashboardWidget: React.FC = () => {
       </div>
 
       {/* Pie con indicador de salud del sistema */}
-      <div className="flex items-center justify-between text-[11px] text-[#64748B]">
+      <div className="flex items-center justify-between text-[11px] text-[#556275]">
         <span>{language === 'es' ? 'Disponibilidad / Uptime' : 'System Availability / Uptime'}</span>
         <span className="font-mono font-bold text-emerald-700">99.98% SLA</span>
       </div>

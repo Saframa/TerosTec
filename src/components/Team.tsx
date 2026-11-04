@@ -17,7 +17,7 @@ export const Team: React.FC = () => {
           <h2 className="display-title text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight mb-4">
             {t('team_title')}
           </h2>
-          <p className="text-base sm:text-lg text-[#64748B] leading-relaxed">
+          <p className="text-base sm:text-lg text-[#556275] leading-relaxed">
             {t('team_desc')}
           </p>
         </div>
@@ -68,7 +68,7 @@ export const Team: React.FC = () => {
                 <h3 className="text-base font-bold text-[#0F172A] tracking-tight">
                   {member.name}
                 </h3>
-                <p className="text-xs text-[#64748B] font-medium mt-0.5">
+                <p className="text-xs text-[#556275] font-medium mt-0.5">
                   {t('role_cofounder')}
                 </p>
               </div>

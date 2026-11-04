@@ -180,7 +180,7 @@ export const Contact: React.FC = () => {
               <h2 className="display-title text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight mb-4">
                 {t('contact_title')}
               </h2>
-              <p className="text-base text-[#64748B] leading-relaxed">
+              <p className="text-base text-[#556275] leading-relaxed">
                 {t('contact_desc')}
               </p>
             </div>
@@ -194,7 +194,7 @@ export const Contact: React.FC = () => {
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-[11px] font-medium uppercase tracking-wider text-[#94A3B8]">
+                  <span className="text-[11px] font-medium uppercase tracking-wider text-[#556275]">
                     Email Oficial
                   </span>
                   <p className="text-sm font-semibold text-[#0F172A] group-hover:underline">
@@ -208,7 +208,7 @@ export const Contact: React.FC = () => {
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-[11px] font-medium uppercase tracking-wider text-[#94A3B8]">
+                  <span className="text-[11px] font-medium uppercase tracking-wider text-[#556275]">
                     Ubicación & Cobertura
                   </span>
                   <p className="text-sm font-semibold text-[#0F172A]">
@@ -222,7 +222,7 @@ export const Contact: React.FC = () => {
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-[11px] font-medium uppercase tracking-wider text-[#94A3B8]">
+                  <span className="text-[11px] font-medium uppercase tracking-wider text-[#556275]">
                     Respuesta Técnica
                   </span>
                   <p className="text-sm font-semibold text-[#0F172A]">
@@ -246,7 +246,7 @@ export const Contact: React.FC = () => {
                   <h3 className="text-xl font-bold text-[#0F172A]">
                     {language === 'es' ? 'Mensaje Enviado' : 'Message Sent'}
                   </h3>
-                  <p className="text-sm text-[#64748B] max-w-md mx-auto">
+                  <p className="text-sm text-[#556275] max-w-md mx-auto">
                     {t('form_success')}
                   </p>
                   <button
@@ -272,56 +272,60 @@ export const Contact: React.FC = () => {
                   />
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#475569] mb-1.5">
+                      <label htmlFor="contact-name" className="block text-xs font-semibold uppercase tracking-wider text-[#475569] mb-1.5">
                         {t('form_name')} *
                       </label>
                       <input
+                        id="contact-name"
                         type="text"
                         name="name"
                         required
                         value={formData.name}
                         onChange={handleChange}
                         placeholder={language === 'es' ? 'Tu nombre o empresa' : 'Your name or company'}
-                        className="w-full px-4 py-3 rounded-xl bg-white border border-black/10 focus:border-black/30 focus:outline-hidden text-sm text-[#0F172A] placeholder:text-[#94A3B8] transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-black/10 focus:border-black/30 focus:outline-hidden text-sm text-[#0F172A] placeholder:text-[#64748B] transition-all"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#475569] mb-1.5">
+                      <label htmlFor="contact-email" className="block text-xs font-semibold uppercase tracking-wider text-[#475569] mb-1.5">
                         {t('form_email')} *
                       </label>
                       <input
+                        id="contact-email"
                         type="email"
                         name="email"
                         required
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="ejemplo@empresa.com"
-                        className="w-full px-4 py-3 rounded-xl bg-white border border-black/10 focus:border-black/30 focus:outline-hidden text-sm text-[#0F172A] placeholder:text-[#94A3B8] transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-black/10 focus:border-black/30 focus:outline-hidden text-sm text-[#0F172A] placeholder:text-[#64748B] transition-all"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#475569] mb-1.5">
+                      <label htmlFor="contact-phone" className="block text-xs font-semibold uppercase tracking-wider text-[#475569] mb-1.5">
                         {t('form_phone')}
                       </label>
                       <input
+                        id="contact-phone"
                         type="tel"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="+598 99 000 000"
-                        className="w-full px-4 py-3 rounded-xl bg-white border border-black/10 focus:border-black/30 focus:outline-hidden text-sm text-[#0F172A] placeholder:text-[#94A3B8] transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-black/10 focus:border-black/30 focus:outline-hidden text-sm text-[#0F172A] placeholder:text-[#64748B] transition-all"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#475569] mb-1.5">
+                      <label htmlFor="contact-service" className="block text-xs font-semibold uppercase tracking-wider text-[#475569] mb-1.5">
                         {t('form_service')}
                       </label>
                       <select
+                        id="contact-service"
                         name="service"
                         value={formData.service}
                         onChange={handleChange}
@@ -337,10 +341,11 @@ export const Contact: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-[#475569] mb-1.5">
+                    <label htmlFor="contact-message" className="block text-xs font-semibold uppercase tracking-wider text-[#475569] mb-1.5">
                       {t('form_msg')} *
                     </label>
                     <textarea
+                      id="contact-message"
                       name="message"
                       required
                       rows={4}
@@ -351,7 +356,7 @@ export const Contact: React.FC = () => {
                           ? 'Describe el objetivo del proyecto, funcionalidades esperadas o tiempos aproximados...'
                           : 'Describe project goals, desired features, or timeline...'
                       }
-                      className="w-full px-4 py-3 rounded-xl bg-white border border-black/10 focus:border-black/30 focus:outline-hidden text-sm text-[#0F172A] placeholder:text-[#94A3B8] transition-all resize-y"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-black/10 focus:border-black/30 focus:outline-hidden text-sm text-[#0F172A] placeholder:text-[#64748B] transition-all resize-y"
                     />
                   </div>
 
@@ -413,7 +418,7 @@ export const Contact: React.FC = () => {
                   </button>
 
                   {submissionsCount > 0 && !isRateLimited && (
-                    <div className="text-[11px] text-[#64748B] flex items-center justify-between px-1 font-mono">
+                    <div className="text-[11px] text-[#556275] flex items-center justify-between px-1 font-mono">
                       <span>
                         {language === 'es'
                           ? `Envíos en esta ventana: ${submissionsCount}/${MAX_SUBMISSIONS}`
@@ -425,7 +430,7 @@ export const Contact: React.FC = () => {
                     </div>
                   )}
 
-                  <div className="flex items-center justify-center gap-2 pt-2 text-[11px] text-[#94A3B8]">
+                  <div className="flex items-center justify-center gap-2 pt-2 text-[11px] text-[#556275]">
                     <ShieldCheck className="w-3.5 h-3.5" />
                     <span>
                       {language === 'es'

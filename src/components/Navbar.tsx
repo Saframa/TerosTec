@@ -53,7 +53,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
           <div className="w-9 h-9 rounded-xl bg-[#0F172A] flex items-center justify-center p-1.5 shadow-sm transition-transform group-hover:scale-105">
             <img
               src="/logo-icon-white.png"
-              alt="TerosTec"
+              alt=""
               width={24}
               height={24}
               className="w-6 h-6 object-contain"
@@ -64,7 +64,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
             <span className="font-semibold text-lg tracking-tight text-[#0F172A] group-hover:text-black transition-colors">
               {siteConfig.name}
             </span>
-            <span className="text-[10px] uppercase tracking-widest text-[#64748B] font-medium -mt-1 hidden sm:block">
+            <span className="text-[10px] uppercase tracking-widest text-[#556275] font-medium -mt-1 hidden sm:block">
               Software Boutique
             </span>
           </div>
@@ -96,15 +96,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
             href={otherLanguagePath}
             onClick={handleLanguageClick}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white/80 border border-black/10 hover:border-black/25 text-[#334155] hover:text-[#0F172A] transition-all shadow-2xs"
-            aria-label="Toggle language"
+            aria-label={`ES / EN: ${language === 'es' ? 'cambiar idioma a inglés' : 'switch language to Spanish'}`}
             title="Cambiar idioma / Switch language"
           >
-            <Globe className="w-3.5 h-3.5 text-[#64748B]" />
-            <span className={language === 'es' ? 'text-[#0F172A] font-bold' : 'text-[#94A3B8]'}>
+            <Globe className="w-3.5 h-3.5 text-[#556275]" />
+            <span className={language === 'es' ? 'text-[#0F172A] font-bold' : 'text-[#556275]'}>
               ES
             </span>
-            <span className="text-[#CBD5E1]">/</span>
-            <span className={language === 'en' ? 'text-[#0F172A] font-bold' : 'text-[#94A3B8]'}>
+            <span className="text-[#556275]">/</span>
+            <span className={language === 'en' ? 'text-[#0F172A] font-bold' : 'text-[#556275]'}>
               EN
             </span>
           </a>
@@ -125,7 +125,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
             href={otherLanguagePath}
             onClick={handleLanguageClick}
             className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-white/80 border border-black/10 text-[#334155]"
-            aria-label="Toggle language"
+            aria-label={`${language.toUpperCase()}: ${language === 'es' ? 'cambiar idioma a inglés' : 'switch language to Spanish'}`}
           >
             {language.toUpperCase()}
           </a>

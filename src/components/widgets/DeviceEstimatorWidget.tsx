@@ -33,10 +33,12 @@ export const DeviceEstimatorWidget: React.FC = () => {
           <button
             type="button"
             onClick={() => setDevice('desktop')}
+            aria-label="Desktop"
+            aria-pressed={device === 'desktop'}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
               device === 'desktop'
                 ? 'bg-white text-[#0F172A] shadow-2xs font-semibold'
-                : 'text-[#64748B] hover:text-[#0F172A]'
+                : 'text-[#556275] hover:text-[#0F172A]'
             }`}
           >
             <Monitor className="w-3.5 h-3.5" />
@@ -45,10 +47,12 @@ export const DeviceEstimatorWidget: React.FC = () => {
           <button
             type="button"
             onClick={() => setDevice('mobile')}
+            aria-label="Mobile"
+            aria-pressed={device === 'mobile'}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
               device === 'mobile'
                 ? 'bg-white text-[#0F172A] shadow-2xs font-semibold'
-                : 'text-[#64748B] hover:text-[#0F172A]'
+                : 'text-[#556275] hover:text-[#0F172A]'
             }`}
           >
             <Smartphone className="w-3.5 h-3.5" />
@@ -66,7 +70,7 @@ export const DeviceEstimatorWidget: React.FC = () => {
               <div className="w-2 h-2 rounded-full bg-slate-300" />
               <div className="w-2 h-2 rounded-full bg-slate-300" />
               <div className="w-2 h-2 rounded-full bg-slate-300" />
-              <div className="flex-1 text-center font-mono text-[9px] text-slate-400 bg-slate-50 py-0.5 rounded">
+              <div className="flex-1 text-center font-mono text-[9px] text-[#556275] bg-slate-50 py-0.5 rounded">
                 terostec.com/preview
               </div>
             </div>
@@ -108,6 +112,7 @@ export const DeviceEstimatorWidget: React.FC = () => {
 
         <input
           type="range"
+          aria-label={language === 'es' ? 'Alcance estimado en pantallas' : 'Estimated scope in pages'}
           min="1"
           max="8"
           value={pages}
@@ -118,11 +123,11 @@ export const DeviceEstimatorWidget: React.FC = () => {
         {/* Resumen calculado en tiempo real */}
         <div className="pt-2 border-t border-black/5 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-[11px]">
           <div>
-            <span className="text-[#64748B]">{language === 'es' ? 'Tipo: ' : 'Type: '}</span>
+            <span className="text-[#556275]">{language === 'es' ? 'Tipo: ' : 'Type: '}</span>
             <span className="font-semibold text-[#0F172A]">{getArchitecture(pages)}</span>
           </div>
           <div>
-            <span className="text-[#64748B]">{language === 'es' ? 'Plazo: ' : 'Time: '}</span>
+            <span className="text-[#556275]">{language === 'es' ? 'Plazo: ' : 'Time: '}</span>
             <span className="font-semibold text-emerald-700">{getTimeline(pages)}</span>
           </div>
         </div>

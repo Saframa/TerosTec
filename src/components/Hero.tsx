@@ -65,7 +65,7 @@ export const Hero: React.FC = () => {
               className="apple-button w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium bg-white/80 hover:bg-white text-[#334155] hover:text-[#0F172A] border border-black/10 hover:border-black/20 shadow-xs transition-all"
             >
               <span>{t('hero_cta_secondary')}</span>
-              <ChevronDown className="w-4 h-4 text-[#64748B]" />
+              <ChevronDown className="w-4 h-4 text-[#556275]" />
             </a>
           </div>
         </div>
@@ -83,7 +83,7 @@ export const Hero: React.FC = () => {
                   <div className="w-9 h-9 rounded-xl bg-[#E6E9EE] flex items-center justify-center text-[#334155] group-hover:bg-[#0F172A] group-hover:text-white transition-colors">
                     <Icon className="w-4 h-4" />
                   </div>
-                  <span className="text-xs font-mono font-medium text-[#94A3B8]">
+                  <span className="text-xs font-mono font-medium text-[#556275]">
                     {item.num}
                   </span>
                 </div>
@@ -91,7 +91,7 @@ export const Hero: React.FC = () => {
                   <p className="text-sm font-semibold text-[#0F172A] tracking-tight mb-1">
                     {item.label}
                   </p>
-                  <p className="text-xs text-[#64748B] leading-relaxed">
+                  <p className="text-xs text-[#556275] leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
