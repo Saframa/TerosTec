@@ -1,34 +1,16 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage, LANGUAGE_PATHS } from '../context/LanguageContext';
 import { siteConfig } from '../config/site';
 import { ArrowUpRight, Menu, X, Globe } from 'lucide-react';
 
 interface NavbarProps {
   onOpenPortfolio?: () => void;
-  introProgress?: number;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio, introProgress }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
   const { language, toggleLanguage, t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logoClicks, setLogoClicks] = useState(0);
-
-  const isIntroControlled = introProgress !== undefined;
-  const headerOpacity = isIntroControlled
-    ? introProgress <= 0.55
-      ? 0
-      : Math.min(1, (introProgress - 0.55) / 0.3)
-    : 1;
-  const headerPointerEvents = isIntroControlled
-    ? introProgress >= 0.85
-      ? 'auto'
-      : 'none'
-    : 'auto';
-  const logoOpacity = isIntroControlled
-    ? introProgress >= 0.92
-      ? Math.min(1, (introProgress - 0.92) / 0.08)
-      : 0
-    : 1;
 
   const handleLogoClick = (e: React.MouseEvent) => {
     // Secret trigger para abrir el portafolio si se hace clic 5 veces seguidas
@@ -39,6 +21,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio, introProgress }
       onOpenPortfolio();
       setLogoClicks(0);
     }
+  };
+
+  // Enlace real para que Google descubra la otra versión; con JS cambia sin recargar.
+  const otherLanguagePath = LANGUAGE_PATHS[language === 'es' ? 'en' : 'es'];
+  const handleLanguageClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toggleLanguage();
   };
 
   const navLinks = [
@@ -52,10 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio, introProgress }
   ];
 
   return (
-    <header
-      style={{ opacity: headerOpacity, pointerEvents: headerPointerEvents as 'auto' | 'none' }}
-      className="fixed top-0 left-0 right-0 z-40 w-full glass-nav transition-opacity duration-200"
-    >
+    <header className="fixed top-0 left-0 right-0 z-40 w-full glass-nav">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 flex items-center justify-between">
         {/* Monograma y Logotipo */}
         <a
@@ -64,11 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio, introProgress }
           className="flex items-center gap-3.5 group select-none"
           title="TerosTec"
         >
-          <div
-            id="navbar-logo-target"
-            style={{ opacity: logoOpacity }}
-            className="w-9 h-9 rounded-xl bg-[#0F172A] flex items-center justify-center p-1.5 shadow-sm transition-opacity group-hover:scale-105"
-          >
+          <div className="w-9 h-9 rounded-xl bg-[#0F172A] flex items-center justify-center p-1.5 shadow-sm transition-transform group-hover:scale-105">
             <img
               src="/logo-icon-white.png"
               alt="TerosTec"
@@ -110,8 +92,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio, introProgress }
         {/* Acciones: Selector de Idioma y Botón CTA */}
         <div className="hidden md:flex items-center gap-3">
           {/* Selector Bilingüe ES / EN */}
-          <button
-            onClick={toggleLanguage}
+          <a
+            href={otherLanguagePath}
+            onClick={handleLanguageClick}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white/80 border border-black/10 hover:border-black/25 text-[#334155] hover:text-[#0F172A] transition-all shadow-2xs"
             aria-label="Toggle language"
             title="Cambiar idioma / Switch language"
@@ -124,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio, introProgress }
             <span className={language === 'en' ? 'text-[#0F172A] font-bold' : 'text-[#94A3B8]'}>
               EN
             </span>
-          </button>
+          </a>
 
           {/* CTA Iniciar Proyecto */}
           <a
@@ -138,13 +121,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio, introProgress }
 
         {/* Botón Hamburguesa Móvil */}
         <div className="flex md:hidden items-center gap-2">
-          <button
-            onClick={toggleLanguage}
+          <a
+            href={otherLanguagePath}
+            onClick={handleLanguageClick}
             className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-white/80 border border-black/10 text-[#334155]"
             aria-label="Toggle language"
           >
             {language.toUpperCase()}
-          </button>
+          </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-lg bg-white/80 border border-black/10 text-[#0F172A]"

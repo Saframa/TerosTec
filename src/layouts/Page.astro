@@ -1,0 +1,63 @@
+---
+import SeoHead from './SeoHead.astro';
+import { siteConfig } from '../config/site';
+import '../index.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  noindex?: boolean;
+  structuredData?: object;
+}
+
+// Páginas estáticas livianas (servicios y 404): HTML puro, sin React ni preloader.
+const { title, description, canonical, noindex, structuredData } = Astro.props;
+---
+
+<!doctype html>
+<html lang={siteConfig.seo.es.htmlLang} class="scroll-smooth">
+  <head>
+    <SeoHead {title} {description} {canonical} {noindex} {structuredData} />
+  </head>
+  <body class="bg-[#E6E9EE] text-[#0F172A] antialiased selection:bg-neutral-300 selection:text-neutral-900">
+    <header class="glass-nav sticky top-0 z-40 w-full">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3.5" title="TerosTec">
+          <span class="w-9 h-9 rounded-xl bg-[#0F172A] flex items-center justify-center p-1.5 shadow-sm">
+            <img src="/logo-icon-white.png" alt="" width="24" height="24" class="w-6 h-6 object-contain" decoding="async" />
+          </span>
+          <span class="font-semibold text-lg tracking-tight text-[#0F172A]">{siteConfig.name}</span>
+        </a>
+        <a
+          href="/#contact"
+          class="apple-button inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold bg-[#0F172A] text-white hover:bg-black shadow-sm"
+        >
+          Hablemos de tu proyecto
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="mt-16 border-t border-black/8 bg-white/40 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav aria-label="Servicios" class="flex flex-wrap gap-x-6 gap-y-2 text-xs font-medium text-[#475569]">
+          {
+            siteConfig.services.map((service) => (
+              <a href={`/servicios/${service.slug}/`} class="hover:text-[#0F172A] transition-colors">
+                {service.label}
+              </a>
+            ))
+          }
+        </nav>
+        <p class="mt-6 text-xs text-[#64748B]">
+          {siteConfig.name} · {siteConfig.location} ·
+          <a href={`mailto:${siteConfig.email}`} class="hover:text-[#0F172A] underline">{siteConfig.email}</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

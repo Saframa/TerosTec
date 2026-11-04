@@ -9,9 +9,9 @@ export const translations = {
     nav_contact: "Contacto",
     nav_cta: "Iniciar Proyecto",
 
-    hero_title_1: "Tecnología y diseño boutique:",
+    hero_title_1: "Desarrollo de software y páginas web en Montevideo:",
     hero_title_2: "creamos las herramientas digitales que tu negocio necesita para operar y vender mejor.",
-    hero_subtitle: "Desarrollamos soluciones web de alta conversión, sistemas a medida y automatizaciones de procesos con arquitectura sólida y foco absoluto en resultados tangibles.",
+    hero_subtitle: "Tecnología y diseño boutique para pymes de Montevideo y todo Uruguay: desarrollamos soluciones web de alta conversión, sistemas a medida y automatizaciones de procesos con arquitectura sólida y foco absoluto en resultados tangibles.",
     hero_cta_primary: "Hablemos de tu Proyecto",
     hero_cta_secondary: "Explorar Soluciones",
 
@@ -131,9 +131,9 @@ export const translations = {
     nav_contact: "Contact",
     nav_cta: "Start Project",
 
-    hero_title_1: "Boutique technology & design:",
+    hero_title_1: "Custom software & web development in Montevideo, Uruguay:",
     hero_title_2: "we build the digital tools your business needs to operate and scale.",
-    hero_subtitle: "We engineer high-converting web experiences, custom platforms, and business automations with robust architecture and tangible ROI.",
+    hero_subtitle: "Boutique technology and design: we engineer high-converting web experiences, custom platforms, and business automations with robust architecture and tangible ROI.",
     hero_cta_primary: "Discuss Your Project",
     hero_cta_secondary: "Explore Solutions",
 

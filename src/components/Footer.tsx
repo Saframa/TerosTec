@@ -4,7 +4,7 @@ import { siteConfig } from '../config/site';
 import { ArrowUp } from 'lucide-react';
 
 export const Footer: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
@@ -63,6 +63,16 @@ export const Footer: React.FC = () => {
             <ArrowUp className="w-4 h-4" />
           </button>
         </div>
+
+        {language === 'es' && (
+          <nav aria-label="Servicios" className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-[#475569]">
+            {siteConfig.services.map((service) => (
+              <a key={service.slug} href={`/servicios/${service.slug}/`} className="hover:text-[#0F172A] transition-colors">
+                {service.label}
+              </a>
+            ))}
+          </nav>
+        )}
 
         <div className="mt-8 pt-6 border-t border-black/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#94A3B8]">
           {/* El año se calcula al compilar; si el cliente ya está en el año siguiente, no es un error */}

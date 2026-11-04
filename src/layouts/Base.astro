@@ -3,6 +3,7 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import App from '../App';
 import type { Language } from '../i18n/translations';
+import SeoHead from './SeoHead.astro';
 import { siteConfig } from '../config/site';
 import '../index.css';
 
@@ -11,28 +12,12 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const SITE = 'https://terostec.netlify.app';
+const SITE = siteConfig.url;
 const urls: Record<Language, string> = { es: `${SITE}/`, en: `${SITE}/en/` };
 
 const meta = {
-  es: {
-    title: 'TerosTec | Software Boutique & Soluciones Digitales',
-    description:
-      'Desarrollo de software boutique, sistemas a medida, automatizaciones y plataformas web de alto impacto en Montevideo y con alcance global.',
-    keywords:
-      'software boutique, desarrollo a medida, plataformas web, automatizaciones n8n, bots whatsapp, ingeniería de software, uruguay, montevideo',
-    locale: 'es_UY',
-    altLocale: 'en_US',
-  },
-  en: {
-    title: 'TerosTec | Boutique Software & Digital Solutions',
-    description:
-      'Boutique software development: custom systems, process automation and high-impact web platforms, built in Montevideo with global reach.',
-    keywords:
-      'boutique software, custom development, web platforms, n8n automation, whatsapp bots, software engineering, uruguay, montevideo',
-    locale: 'en_US',
-    altLocale: 'es_UY',
-  },
+  es: { ...siteConfig.seo.es, locale: 'es_UY', altLocale: 'en_US' },
+  en: { ...siteConfig.seo.en, locale: 'en_US', altLocale: 'es_UY' },
 }[lang];
 
 // La app completa se prerenderiza a HTML (indexable sin ejecutar JS) y luego
@@ -51,20 +36,21 @@ const structuredData = {
       alternateName: ['TerosTec Software Boutique', 'TerosTec Uruguay'],
       url: `${SITE}/`,
       inLanguage: ['es-UY', 'en-US'],
-      description: 'Desarrollo de software boutique, sistemas a medida y automatizaciones de procesos.',
+      description: siteConfig.seo.es.description,
     },
     {
       '@type': 'ProfessionalService',
       '@id': `${SITE}/#organization`,
       name: 'TerosTec',
       url: `${SITE}/`,
-      logo: { '@type': 'ImageObject', url: `${SITE}/favicon.svg`, width: 64, height: 64 },
+      description: siteConfig.seo.es.description,
+      logo: { '@type': 'ImageObject', url: `${SITE}/logo-icon-512.png` },
       image: `${SITE}/og-image.png`,
       email: siteConfig.email,
       address: { '@type': 'PostalAddress', addressLocality: 'Montevideo', addressCountry: 'UY' },
       areaServed: [
+        { '@type': 'City', name: 'Montevideo' },
         { '@type': 'Country', name: 'Uruguay' },
-        { '@type': 'AdministrativeArea', name: 'Global' },
       ],
       founder: team.map((m) => ({
         '@type': 'Person',
@@ -73,7 +59,7 @@ const structuredData = {
         ...(m.linkedinUrl ? { sameAs: m.linkedinUrl } : {}),
       })),
       sameAs: [
-        'https://github.com/Saframa/TerosTec',
+        siteConfig.instagramUrl,
         ...team.filter((m) => m.linkedinUrl).map((m) => m.linkedinUrl),
       ],
       hasOfferCatalog: {
@@ -95,59 +81,21 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html lang={lang} class="scroll-smooth">
+<html lang={meta.htmlLang} class="scroll-smooth">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- 1. METADATOS (SEO BÁSICO) -->
-    <title>{meta.title}</title>
-    <meta name="description" content={meta.description} />
-    <link rel="canonical" href={urls[lang]} />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="author" content="TerosTec" />
-    <meta name="google-site-verification" content="google10436712f33c97a7" />
-    <meta name="keywords" content={meta.keywords} />
-
-    <!-- Versiones por idioma -->
-    <link rel="alternate" hreflang="es" href={urls.es} />
-    <link rel="alternate" hreflang="en" href={urls.en} />
-    <link rel="alternate" hreflang="x-default" href={urls.es} />
-
-    <!-- 2. OPEN GRAPH & TWITTER CARDS -->
-    <meta property="og:site_name" content="TerosTec" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={meta.title} />
-    <meta property="og:description" content={meta.description} />
-    <meta property="og:url" content={urls[lang]} />
-    <meta property="og:image" content={`${SITE}/og-image.png`} />
-    <meta property="og:image:secure_url" content={`${SITE}/og-image.png`} />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`TerosTec - ${meta.title.replace('TerosTec | ', '')}`} />
-    <meta property="og:locale" content={meta.locale} />
-    <meta property="og:locale:alternate" content={meta.altLocale} />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={meta.title} />
-    <meta name="twitter:description" content={meta.description} />
-    <meta name="twitter:image" content={`${SITE}/og-image.png`} />
-
-    <!-- 3. IDENTIDAD VISUAL (FAVICONS & PWA) -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="alternate icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#E6E9EE" />
-
-    <!-- Tipografía: Inter autoalojada -->
-    <link rel="preload" href="/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin />
-
-    <!-- 4. DATOS ESTRUCTURADOS (JSON-LD) -->
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <SeoHead
+      title={meta.title}
+      description={meta.description}
+      canonical={urls[lang]}
+      locale={meta.locale}
+      altLocale={meta.altLocale}
+      alternates={[
+        { hreflang: 'es', href: urls.es },
+        { hreflang: 'en', href: urls.en },
+        { hreflang: 'x-default', href: urls.es },
+      ]}
+      {structuredData}
+    />
 
     <!-- ESTILOS CRITICOS DEL PRELOADER CON LLENADO DE LOGO -->
     <style is:inline>
@@ -205,7 +153,7 @@ const structuredData = {
         <!-- Silueta tenue de fondo -->
         <img
           src="/logo-icon.png"
-          alt="TerosTec"
+          alt=""
           width="136"
           height="136"
           style="width: 100%; height: 100%; object-fit: contain; opacity: 0.12; user-select: none; pointer-events: none;"
@@ -214,7 +162,7 @@ const structuredData = {
         <div class="preloader-fill-layer">
           <img
             src="/logo-icon.png"
-            alt="TerosTec"
+            alt=""
             width="136"
             height="136"
             style="width: 100%; height: 100%; object-fit: contain; user-select: none; pointer-events: none;"
