@@ -71,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
         </a>
 
         {/* Enlaces de Escritorio */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[#475569]">
+        <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-[#475569]">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -90,7 +90,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
         </nav>
 
         {/* Acciones: Selector de Idioma y Botón CTA */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           {/* Selector Bilingüe ES / EN */}
           <a
             href={otherLanguagePath}
@@ -120,7 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
         </div>
 
         {/* Botón Hamburguesa Móvil */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex lg:hidden items-center gap-2">
           <a
             href={otherLanguagePath}
             onClick={handleLanguageClick}
@@ -141,7 +141,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPortfolio }) => {
 
       {/* Menú desplegable para dispositivos móviles */}
       {mobileMenuOpen && (
-        <div className="md:hidden px-4 pt-2 pb-6 bg-[#E6E9EE]/98 border-b border-black/10 shadow-lg">
+        <div className="lg:hidden px-4 pt-2 pb-6 bg-[#E6E9EE]/98 border-b border-black/10 shadow-lg">
           <div className="flex flex-col space-y-3 pt-2">
             {navLinks.map((link) => (
               <a
