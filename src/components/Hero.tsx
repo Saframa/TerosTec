@@ -2,16 +2,8 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { ArrowUpRight, ChevronDown, Layers, Target, Cpu, MapPin } from 'lucide-react';
 
-interface HeroProps {
-  introProgress?: number;
-}
-
-export const Hero: React.FC<HeroProps> = ({ introProgress }) => {
+export const Hero: React.FC = () => {
   const { t } = useLanguage();
-
-  const isIntroControlled = introProgress !== undefined;
-  // Revelado ágil y 100% nítido: sin texturas rasterizadas de GPU ni opacidades intermedias lentas
-  const isRevealed = !isIntroControlled || introProgress >= 0.55;
 
   const valueProps = [
     {
@@ -42,11 +34,6 @@ export const Hero: React.FC<HeroProps> = ({ introProgress }) => {
 
   return (
     <section
-      style={{
-        opacity: isRevealed ? 1 : 0,
-        pointerEvents: isRevealed ? 'auto' : 'none',
-        transition: 'opacity 0.2s ease-out',
-      }}
       className="relative pt-28 pb-20 sm:pt-36 sm:pb-28 lg:pt-40 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -101,9 +88,9 @@ export const Hero: React.FC<HeroProps> = ({ introProgress }) => {
                   </span>
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-[#0F172A] tracking-tight mb-1">
+                  <p className="text-sm font-semibold text-[#0F172A] tracking-tight mb-1">
                     {item.label}
-                  </h3>
+                  </p>
                   <p className="text-xs text-[#64748B] leading-relaxed">
                     {item.desc}
                   </p>

@@ -1,0 +1,17 @@
+# TerosTec
+
+> Empresa de software de Montevideo, Uruguay. Desarrolla páginas web, tiendas online, bots de WhatsApp, automatizaciones y software a medida para pymes y emprendimientos de Uruguay y del exterior.
+
+## Servicios
+
+- [Diseño de páginas web en Montevideo](https://terostec.netlify.app/servicios/paginas-web-montevideo/): landing pages, webs institucionales, cotizadores y sistemas de reservas.
+- [Tiendas online en Uruguay](https://terostec.netlify.app/servicios/tiendas-online-uruguay/): tiendas con Mercado Pago o Stripe, catálogos B2B y portales de clientes.
+- [Bots de WhatsApp en Uruguay](https://terostec.netlify.app/servicios/bots-whatsapp-uruguay/): bots de atención y automatizaciones con n8n y Make.
+- [Software a medida en Uruguay](https://terostec.netlify.app/servicios/software-a-medida-uruguay/): dashboards, control de stock, apps PWA y MVPs.
+
+## Contacto
+
+- [Sitio web](https://terostec.netlify.app/)
+- [English version](https://terostec.netlify.app/en/)
+- Correo: terostecuy@gmail.com
+- Instagram: https://www.instagram.com/terostecuy/

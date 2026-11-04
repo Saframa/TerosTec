@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { translations, Language } from '../i18n/translations';
+import { siteConfig } from '../config/site';
 
 interface LanguageContextType {
   language: Language;
@@ -14,11 +15,6 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 // inicial lo decide la página y no el navegador: el HTML del servidor y la
 // hidratación siempre coinciden.
 export const LANGUAGE_PATHS: Record<Language, string> = { es: '/', en: '/en/' };
-
-const TITLES: Record<Language, string> = {
-  es: 'TerosTec | Software Boutique & Soluciones Digitales',
-  en: 'TerosTec | Boutique Software & Digital Solutions',
-};
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode; initialLanguage?: Language }> = ({
   children,
@@ -43,8 +39,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode; initialLang
   };
 
   useEffect(() => {
-    document.documentElement.lang = language;
-    document.title = TITLES[language];
+    document.documentElement.lang = siteConfig.seo[language].htmlLang;
+    document.title = siteConfig.seo[language].title;
   }, [language]);
 
   const t = (key: string): string => {

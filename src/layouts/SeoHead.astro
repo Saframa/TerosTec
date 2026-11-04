@@ -1,0 +1,68 @@
+---
+import { siteConfig } from '../config/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  locale?: string;
+  altLocale?: string;
+  alternates?: { hreflang: string; href: string }[];
+  noindex?: boolean;
+  structuredData?: object;
+}
+
+const { title, description, canonical, locale = 'es_UY', altLocale, alternates = [], noindex = false, structuredData } = Astro.props;
+const ogImage = `${siteConfig.url}/og-image.png`;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- 1. METADATOS (SEO BÁSICO) -->
+<title>{title}</title>
+<meta name="description" content={description} />
+{canonical && <link rel="canonical" href={canonical} />}
+<meta
+  name="robots"
+  content={noindex ? 'noindex' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+/>
+<meta name="author" content="TerosTec" />
+
+<!-- Versiones por idioma -->
+{alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
+
+<!-- 2. OPEN GRAPH & TWITTER CARDS -->
+<meta property="og:site_name" content="TerosTec" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+{canonical && <meta property="og:url" content={canonical} />}
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:secure_url" content={ogImage} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
+<meta property="og:locale" content={locale} />
+{altLocale && <meta property="og:locale:alternate" content={altLocale} />}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- 3. IDENTIDAD VISUAL (FAVICONS & PWA) -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="alternate icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#E6E9EE" />
+
+<!-- Tipografía: Inter autoalojada -->
+<link rel="preload" href="/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin />
+
+<!-- 4. DATOS ESTRUCTURADOS (JSON-LD) -->
+{structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}

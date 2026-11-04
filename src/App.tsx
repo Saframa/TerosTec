@@ -10,11 +10,9 @@ import { Team } from './components/Team';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { PortfolioModal } from './components/PortfolioModal';
-import { ScrollIntroLogo } from './components/ScrollIntroLogo';
 
 export const AppContent: React.FC = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [introProgress, setIntroProgress] = useState(0);
   const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
 
   useEffect(() => {
@@ -42,18 +40,12 @@ export const AppContent: React.FC = () => {
       {/* Efectos de fondo reactivos y textura */}
       <BackgroundEffect />
 
-      {/* Animacion Diagonal del Logo al Scrollear */}
-      <ScrollIntroLogo onProgressChange={setIntroProgress} />
-
-      {/* Barra de Navegacion reactiva al scroll */}
-      <Navbar
-        introProgress={introProgress}
-        onOpenPortfolio={() => setIsPortfolioOpen(true)}
-      />
+      {/* Barra de Navegacion */}
+      <Navbar onOpenPortfolio={() => setIsPortfolioOpen(true)} />
 
       {/* Contenido Principal */}
       <main className="flex-1">
-        <Hero introProgress={introProgress} />
+        <Hero />
         <ServicesBento />
         <Methodology />
         <Team />

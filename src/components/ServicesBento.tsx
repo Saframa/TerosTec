@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { siteConfig } from '../config/site';
 import {
   Globe,
   Calculator,
@@ -21,7 +22,7 @@ import { WorkflowPipelineWidget } from './widgets/WorkflowPipelineWidget';
 import { BIDashboardWidget } from './widgets/BIDashboardWidget';
 
 export const ServicesBento: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const pillars = [
     {
@@ -136,7 +137,9 @@ export const ServicesBento: React.FC = () => {
 
         {/* Bento Grid de Pilares */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          {pillars.map((pillar) => (
+          {pillars.map((pillar) => {
+            const service = siteConfig.services.find((s) => s.pillarId === pillar.id);
+            return (
             <div
               key={pillar.id}
               className="apple-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between"
@@ -188,7 +191,7 @@ export const ServicesBento: React.FC = () => {
               </div>
 
               {/* Botón de Consulta */}
-              <div className="pt-2 border-t border-black/5">
+              <div className="pt-2 border-t border-black/5 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
                 <a
                   href="#contact"
                   className="inline-flex items-center gap-2 text-xs font-semibold text-[#0F172A] hover:text-black group transition-colors"
@@ -196,9 +199,18 @@ export const ServicesBento: React.FC = () => {
                   <span>{t('btn_consult')}</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </a>
+                {language === 'es' && service && (
+                  <a
+                    href={`/servicios/${service.slug}/`}
+                    className="text-xs font-medium text-[#475569] hover:text-[#0F172A] underline transition-colors"
+                  >
+                    {service.label}
+                  </a>
+                )}
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
