@@ -43,7 +43,7 @@ export const Methodology: React.FC = () => {
           <h2 className="display-title text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight mb-4">
             {t('method_title')}
           </h2>
-          <p className="text-base sm:text-lg text-[#64748B] leading-relaxed">
+          <p className="text-base sm:text-lg text-[#556275] leading-relaxed">
             {t('method_desc')}
           </p>
         </div>
@@ -70,14 +70,14 @@ export const Methodology: React.FC = () => {
                   <h3 className="text-base font-bold text-[#0F172A] tracking-tight mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#556275] leading-relaxed">
                     {step.desc}
                   </p>
                 </div>
 
                 <div className="mt-8 pt-4 border-t border-black/5 flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#0F172A]" />
-                  <span className="text-[11px] font-medium text-[#94A3B8] uppercase tracking-wider">
+                  <span className="text-[11px] font-medium text-[#556275] uppercase tracking-wider">
                     Fase {step.num}
                   </span>
                 </div>

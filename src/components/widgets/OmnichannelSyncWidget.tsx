@@ -114,7 +114,7 @@ export const OmnichannelSyncWidget: React.FC = () => {
                 ? 'Monitor de Sincronización Omnicanal'
                 : 'Omnichannel Synchronization Monitor'}
             </h5>
-            <span className="text-[10px] text-[#64748B]">
+            <span className="text-[10px] text-[#556275]">
               {language === 'es'
                 ? 'Canal Web vs. Depósito Físico'
                 : 'Web Channel vs. Central Warehouse'}
@@ -160,7 +160,7 @@ export const OmnichannelSyncWidget: React.FC = () => {
             <span className="text-[11px] font-bold text-[#0F172A] block truncate">
               {language === 'es' ? 'Tienda Web B2B' : 'B2B Web Store'}
             </span>
-            <span className="text-[9px] font-mono text-[#64748B] block">
+            <span className="text-[9px] font-mono text-[#556275] block">
               Frontend API
             </span>
           </div>
@@ -172,7 +172,7 @@ export const OmnichannelSyncWidget: React.FC = () => {
             {syncState === 'transmitting' ? (
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
             ) : (
-              <Zap className="w-3 h-3 text-[#64748B]" />
+              <Zap className="w-3 h-3 text-[#556275]" />
             )}
           </div>
         </div>
@@ -186,7 +186,7 @@ export const OmnichannelSyncWidget: React.FC = () => {
             <span className="text-[11px] font-bold text-[#0F172A] block truncate">
               {language === 'es' ? 'Depósito Central' : 'Central Warehouse'}
             </span>
-            <span className="text-[9px] font-mono text-[#64748B] block">
+            <span className="text-[9px] font-mono text-[#556275] block">
               ERP / Inventario
             </span>
           </div>
@@ -212,7 +212,7 @@ export const OmnichannelSyncWidget: React.FC = () => {
                   className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 ${
                     isSelected
                       ? 'bg-[#0F172A] text-white'
-                      : 'bg-slate-100 text-[#64748B]'
+                      : 'bg-slate-100 text-[#556275]'
                   }`}
                 >
                   <Boxes className="w-3 h-3" />
@@ -221,7 +221,7 @@ export const OmnichannelSyncWidget: React.FC = () => {
                   <span className="text-xs font-semibold text-[#0F172A] block truncate">
                     {product.name}
                   </span>
-                  <span className="text-[9px] font-mono text-[#64748B]">
+                  <span className="text-[9px] font-mono text-[#556275]">
                     {product.sku}
                   </span>
                 </div>
@@ -230,7 +230,7 @@ export const OmnichannelSyncWidget: React.FC = () => {
               {/* Comparador de Stock en Ambos Canales */}
               <div className="flex items-center gap-3 shrink-0">
                 <div className="text-right">
-                  <span className="text-[9px] uppercase tracking-wider text-[#64748B] block">
+                  <span className="text-[9px] uppercase tracking-wider text-[#556275] block">
                     Web
                   </span>
                   <span
@@ -247,7 +247,7 @@ export const OmnichannelSyncWidget: React.FC = () => {
                 <div className="text-slate-300">|</div>
 
                 <div className="text-right">
-                  <span className="text-[9px] uppercase tracking-wider text-[#64748B] block">
+                  <span className="text-[9px] uppercase tracking-wider text-[#556275] block">
                     ERP
                   </span>
                   <span
@@ -319,7 +319,7 @@ export const OmnichannelSyncWidget: React.FC = () => {
           type="button"
           onClick={handleResetStock}
           title={language === 'es' ? 'Restablecer inventario' : 'Reset inventory'}
-          className="p-2.5 rounded-xl bg-white border border-black/10 hover:border-black/20 text-[#64748B] hover:text-[#0F172A] transition-colors"
+          className="p-2.5 rounded-xl bg-white border border-black/10 hover:border-black/20 text-[#556275] hover:text-[#0F172A] transition-colors"
           aria-label="Restablecer inventario"
         >
           <RotateCcw className="w-3.5 h-3.5" />

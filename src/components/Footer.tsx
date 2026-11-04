@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
               <span className="font-semibold text-base tracking-tight text-[#0F172A]">
                 {siteConfig.name}
               </span>
-              <p className="text-xs text-[#64748B]">
+              <p className="text-xs text-[#556275]">
                 {t('footer_location')}
               </p>
             </div>
@@ -74,7 +74,7 @@ export const Footer: React.FC = () => {
           </nav>
         )}
 
-        <div className="mt-8 pt-6 border-t border-black/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#94A3B8]">
+        <div className="mt-8 pt-6 border-t border-black/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#556275]">
           {/* El año se calcula al compilar; si el cliente ya está en el año siguiente, no es un error */}
           <p suppressHydrationWarning>
             (c) {currentYear} {siteConfig.name}. {t('footer_rights')}
